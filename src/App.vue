@@ -29,5 +29,11 @@ body {
 main {
 	margin-top: 61px;
 }
+
+@media (min-width: 1480px) {
+	.container {
+		max-width: 1440px;
+	}
+}
 </style>
 

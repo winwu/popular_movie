@@ -1,5 +1,275 @@
 <template>
-  <div class="detail">
-    <h1>This is an movie detai; page</h1>
-  </div>
+  	<div id="detail">
+        <div v-if="movie" class="detail-has-data">
+            <div class="detail-banner" :style="{ backgroundImage: 'url(' + 'https://image.tmdb.org/t/p/w1280' + movie.backdrop_path + ')' }">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-lg-8">
+                            <h1 class="movie-title">
+                                {{ movie.title }}
+                            </h1>
+                            <div class="clearfix">
+                                <div class="float-md-left">
+                                    <img class="mb-4 poster" :src="'https://image.tmdb.org/t/p/w200' +  movie.poster_path" :srcset="'https://image.tmdb.org/t/p/w400' +  movie.poster_path + ' 2x'" :alt="movie.title">
+                                </div>
+                                <div class="float-md-left movie-infos">
+                                    <div class="movie-rel">
+                                        {{ movie.release_date }}
+                                        <div class="badges d-inline-block">
+                                            <div class="label" :class="movie.status">{{ movie.status }}</div>
+                                            <a class="label website" :href="movie.homepage" target="_blank" rel="noreferrer">Website <i class="fas fa-link"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="statistics">
+                                        <div class="row">
+                                            <div class="col-12 col-sm-2 col-md-3">
+                                                <dl>
+                                                    <dt>Runtime</dt>
+                                                    <dd>{{ movie.runtime }} min</dd>
+                                                </dl>
+                                            </div>
+                                            <div class="col-12 col-sm-2 col-md-3">
+                                                <dl>
+                                                    <dt>Vote</dt>
+                                                    <dd>{{ movie.vote_average }} / 10</dd>
+                                                </dl>
+                                            </div>
+                                            <div class="col-12 col-sm-2 col-md-3">
+                                                <dl>
+                                                    <dt>Popularity</dt>
+                                                    <dd>{{ movie.popularity }}</dd>
+                                                </dl>
+                                            </div>
+                                            <div class="col-12 col-sm-2 col-md-3">
+                                                <dl>
+                                                    <dt>Revenue</dt>
+                                                    <dd>{{ movie.revenue }}</dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="movie-ov">{{ movie.overview }}</p>
+                                    <div v-if="movie.production_companies && movie.production_companies.length">
+                                        <h4>Production companies <i class="fas fa-chevron-down"></i></h4>
+                                        <ul>
+                                            <li v-for="(company, idx) in movie.production_companies" :key="idx">
+                                                {{ company.name }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--.detail-banner-->
+            <div class="detail-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-3">
+                            <h3>Gallery</h3>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <ul class="nav nav-pills nav-fill">
+                                <li class="nav-item">
+                                    <a class="nav-link" :class="{ 'active': currentTab === 'reviews' }" @click.stop="setCurrentTab('reviews')">Reviews</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" :class="{ 'active': currentTab === 'credits' }" @click.stop="setCurrentTab('credits')">Credits</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" :class="{ 'active': currentTab === 'videos' }" @click.stop="setCurrentTab('videos')">Videos</a>
+                                </li>
+                            </ul>
+                            <div class="section-content">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--.detail-bottom-->
+        </div>
+  	</div>
 </template>
+
+<script>
+export default {
+	name: 'movie-detail',
+	// components: {},
+	data() {
+    	return {
+            currentTab: null,
+            movie: null,
+            videos: []
+    	}
+	},
+	mounted() {
+        if (this.$route.params.currentTab && this.$route.params.currentTab !== '') {
+            this.currentTab = this.$route.params.currentTab;
+        } else {
+            this.currentTab = 'reviews';
+        }
+        this.fetchDetail();
+        this.fetchVideo();
+        this.fetchPhoto();
+	},
+	methods: {
+        setCurrentTab(newTab) {
+            this.currentTab = newTab;
+        },
+		fetchDetail() {
+            let movieId = this.$route.params.movieId;
+            if (movieId) {
+                this.$http
+                    .get(`${ this.$conf.API_DOMAIN }movie/${ movieId }?api_key=${ this.$conf.API_KEY }&language=${ this.$conf.API_LANG }`)
+                    .then(res => {
+                        if (res.data) {
+                            this.movie = res.data;
+                        }
+                    })
+            }
+        },
+        fetchVideo() {
+            let movieId = this.$route.params.movieId;
+            if (movieId) {
+                this.$http
+                    .get(`${ this.$conf.API_DOMAIN }movie/${ movieId }/videos?api_key=${ this.$conf.API_KEY }`)
+                    .then(res => {
+                        if (res.data && res.data.results) {
+                            this.videos = res.data.results;
+                        }
+                    })
+            }
+        },
+        fetchPhoto() {
+            let movieId = this.$route.params.movieId;
+            if (movieId) {
+                this.$http
+                    .get(`${ this.$conf.API_DOMAIN }movie/${ movieId }/images?api_key=${ this.$conf.API_KEY }`)
+                    .then(res => {
+                        if (res.data && res.data.results) {
+                            this.videos = res.data.results;
+                        }
+                    })
+            }
+        }
+    },
+    watch: {
+        currentTab: function () {
+            console.log('tab changes!', this.currentTab);
+            this.$router.replace({
+				name: this.$router.name,
+				params: {
+					currentTab: this.currentTab
+				}
+			});
+        }
+    }
+}
+</script>
+<style lang="scss" scoped>
+.detail-has-data {
+    color: #fff;
+}
+.detail-banner {
+    background-size: cover;
+    background-position: center 10%;
+    background-repeat: no-repeat;
+    min-height: 700px;
+    position: relative;
+    &:before {
+        content: ' ';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #111 100%);
+    }
+    .container {
+        position: relative;
+        z-index: 1;
+    }
+    .poster {
+        box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.8);
+        width: 200px;
+        display: block;
+        background: #111;
+    }
+    .movie-title {
+        font-weight: bold;
+        text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.7);
+        color: #fff;
+        font-size: 36px;
+        margin: 20px auto 30px auto;
+        @media (min-width: 768px) {
+            margin: 50px auto;
+            font-size: 76px;
+        }
+    }
+}
+.movie-infos {
+    @media (min-width: 768px) {
+        width: calc(100% - 200px);
+        padding: 0 20px;
+    }
+}
+.movie-rel {
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+.badges {
+    margin: 0 5px;
+    .label {
+        display: inline-block;
+        text-decoration: none;
+        border-radius: 5px;
+        padding: 0px 10px;
+        font-size: 12px;
+        margin: 0 3px;
+        box-sizing: border-box;
+    }
+    .label.Released {
+        border: 1px solid #FFC107;
+        background: #FFC107;
+        color: #111;
+    }
+    .label.website {
+        border: 1px solid #fff;
+        color: #fff;
+        &:hover {
+            background: #fff;
+            color: #111;
+        }
+    }
+}
+.movie-ov {
+
+}
+.statistics {
+    dl {
+        dt {
+
+        }
+        dd {
+            font-weight: normal;
+        }
+    }
+}
+.detail-bottom {
+    margin-bottom: 50px;
+}
+
+.nav-pills {
+    .nav-link {
+        cursor: pointer;
+        border-radius: 0;
+        color: #fff;
+        background: #000;
+        padding: 15px 20px;
+        &.active {
+            background-color: #FFC107;
+            color: #111;
+        }
+
+
+    }
+}
+</style>
