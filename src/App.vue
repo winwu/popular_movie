@@ -22,8 +22,12 @@ export default {
 </script>
 <style>
 body {
-	font-family: 'Noto Sans', sans-serif;
+	font-family: 'Open Sans', 'Noto Sans', sans-serif;
 	background: #111;
+	color: #e0e0e0;
+}
+main {
+	margin-top: 61px;
 }
 </style>
 
