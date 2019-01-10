@@ -75,7 +75,7 @@
                                     <a class="nav-link" :class="{ 'active': currentTab === 'reviews' }" @click.stop="setCurrentTab('reviews')">Reviews</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" :class="{ 'active': currentTab === 'credits' }" @click.stop="setCurrentTab('credits')">Credits</a>
+                                    <a class="nav-link" :class="{ 'active': currentTab === 'credits' }" @click.stop="setCurrentTab('credits')">Cast & Crew</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" :class="{ 'active': currentTab === 'videos' }" @click.stop="setCurrentTab('videos')">Videos</a>
