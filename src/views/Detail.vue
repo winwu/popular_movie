@@ -82,6 +82,10 @@
                                 </li>
                             </ul>
                             <div class="section-content">
+                                <keep-alive>
+                                    <component :is="dynamicComponent"></component>
+                                </keep-alive>
+
                             </div>
                         </div>
                     </div>
@@ -94,7 +98,17 @@
 <script>
 export default {
 	name: 'movie-detail',
-	// components: {},
+	components: {
+        'async-detail-reviews': () => ({
+            component: import('@/views/Detail/Reviews.vue'),
+            loading:  { template: `<h1>Loading...</h1>` },
+            error: { template: `<h1>Error, Sorry!</h1>` },
+            delay: 30000,
+            timeout: 6000
+        }),
+        'async-detail-credits': () => import('@/views/Detail/Credits.vue'),
+        'async-detail-videos': () => import('@/views/Detail/Videos.vue'),
+    },
 	data() {
     	return {
             currentTab: null,
@@ -111,7 +125,18 @@ export default {
         this.fetchDetail();
         this.fetchVideo();
         this.fetchPhoto();
-	},
+    },
+    computed: {
+        dynamicComponent() {
+            if (this.currentTab === 'credits') {
+                return 'async-detail-credits';
+            } else if  (this.currentTab === 'videos') {
+                return 'async-detail-videos';
+            } else {
+                return 'async-detail-reviews';
+            }
+        }
+    },
 	methods: {
         setCurrentTab(newTab) {
             this.currentTab = newTab;

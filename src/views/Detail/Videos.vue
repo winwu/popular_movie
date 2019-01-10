@@ -4,6 +4,9 @@
 
 <script>
 export default {
-    name: 'detail-videos'
+    name: 'detail-videos',
+    mounted() {
+        console.warn('GGGGG');
+    }
 }
 </script>
