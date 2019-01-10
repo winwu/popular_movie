@@ -1,4 +1,4 @@
-# test2
+# Popular Movie
 
 ## Project setup
 ```

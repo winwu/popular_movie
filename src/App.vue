@@ -10,7 +10,7 @@
 <script>
 import LayoutHeader from '@/components/LayoutHeader'
 export default {
-	name: 'home',
+	name: 'app',
 	components: {
 		LayoutHeader
 	},
@@ -20,3 +20,10 @@ export default {
 	}*/
 }
 </script>
+<style>
+body {
+	font-family: 'Noto Sans', sans-serif;
+	background: #111;
+}
+</style>
+
