@@ -9,12 +9,8 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <router-link to="/" class="nav-link">Home</router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link to="/about" class="nav-link">About</router-link>
-                        </li>
+                        <router-link tag="li" active-class="active" to="/" class="nav-item" exact><a class="nav-link">Home</a></router-link>
+                        <router-link tag="li" active-class="active" to="/about" class="nav-item"><a class="nav-link">About</a></router-link>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
