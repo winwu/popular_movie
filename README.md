@@ -1,6 +1,7 @@
 # Popular Movie
 
-## Project setup
+## Proj
+ect setup
 ```
 npm install
 ```
@@ -27,3 +28,10 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+
+
+## note
+
+image size lists: "w92", "w154", "w185", "w342", "w500", "w780", or "original"
