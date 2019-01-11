@@ -121,9 +121,7 @@ export default {
         } else {
             this.currentTab = 'reviews';
         }
-        this.fetchDetail();
-        this.fetchVideo();
-        this.fetchPhoto();
+
     },
     computed: {
         dynamicComponent() {
@@ -137,11 +135,17 @@ export default {
         }
     },
 	methods: {
+        async fetchAll(movieId) {
+            if (movieId) {
+                this.fetchDetail(movieId);
+                this.fetchVideo(movieId);
+                // this.fetchPhoto(movieId);
+            }
+        },
         setCurrentTab(newTab) {
             this.currentTab = newTab;
         },
-		fetchDetail() {
-            let movieId = this.$route.params.movieId;
+		fetchDetail(movieId) {
             if (movieId) {
                 this.$http
                     .get(`${ this.$conf.API_DOMAIN }movie/${ movieId }?api_key=${ this.$conf.API_KEY }&language=${ this.$conf.API_LANG }`)
@@ -152,8 +156,7 @@ export default {
                     })
             }
         },
-        fetchVideo() {
-            let movieId = this.$route.params.movieId;
+        fetchVideo(movieId) {
             if (movieId) {
                 this.$http
                     .get(`${ this.$conf.API_DOMAIN }movie/${ movieId }/videos?api_key=${ this.$conf.API_KEY }`)
@@ -164,7 +167,7 @@ export default {
                     })
             }
         },
-        fetchPhoto() {
+        /*fetchPhoto() {
             let movieId = this.$route.params.movieId;
             if (movieId) {
                 this.$http
@@ -175,7 +178,7 @@ export default {
                         }
                     })
             }
-        }
+        }*/
     },
     watch: {
         currentTab: function () {
@@ -187,6 +190,17 @@ export default {
 				}
 			});
         }
+    },
+    beforeRouteEnter(to, from, next) {
+        let movieId = to.params.movieId ? to.params.movieId : null;
+        next(async vm => {
+            await vm.fetchAll(movieId);
+        })
+    },
+    async beforeRouteUpdate (to, from, next) {
+        let movieId = to.params.movieId ? to.params.movieId : null;
+        await this.fetchAll(movieId);
+        next()
     }
 }
 </script>
