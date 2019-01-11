@@ -1,5 +1,5 @@
 <template>
-  	<div id="detail">
+    <div id="detail">
         <div v-if="movie" class="detail-has-data">
             <div class="detail-banner" :style="{ backgroundImage: 'url(' + 'https://image.tmdb.org/t/p/w1280' + movie.backdrop_path + ')' }">
                 <div class="container">
@@ -72,27 +72,26 @@
                         <div class="col-12 col-md-9">
                             <ul class="nav nav-pills nav-fill">
                                 <li class="nav-item">
-                                    <a class="nav-link" :class="{ 'active': currentTab === 'reviews' }" @click.stop="setCurrentTab('reviews')">Reviews</a>
+                                    <a class="nav-link" :class="{ 'active': currentTab === 'reviews' }" @click.stop.prevent="setCurrentTab('reviews')">Reviews</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" :class="{ 'active': currentTab === 'credits' }" @click.stop="setCurrentTab('credits')">Cast & Crew</a>
+                                    <a class="nav-link" :class="{ 'active': currentTab === 'credits' }" @click.stop.prevent="setCurrentTab('credits')">Cast & Crew</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" :class="{ 'active': currentTab === 'videos' }" @click.stop="setCurrentTab('videos')">Videos</a>
+                                    <a class="nav-link" :class="{ 'active': currentTab === 'videos' }" @click.stop.prevent="setCurrentTab('videos')">Videos</a>
                                 </li>
                             </ul>
                             <div class="section-content">
                                 <keep-alive>
                                     <component :is="dynamicComponent"></component>
                                 </keep-alive>
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div><!--.detail-bottom-->
         </div>
-  	</div>
+    </div>
 </template>
 
 <script>
@@ -107,14 +106,14 @@ export default {
             timeout: 6000
         }),
         'async-detail-credits': () => import('@/views/Detail/Credits.vue'),
-        'async-detail-videos': () => import('@/views/Detail/Videos.vue'),
+        'async-detail-videos': () => import('@/views/Detail/Videos.vue')
     },
 	data() {
-    	return {
+        return {
             currentTab: null,
             movie: null,
             videos: []
-    	}
+        }
 	},
 	mounted() {
         if (this.$route.params.currentTab && this.$route.params.currentTab !== '') {

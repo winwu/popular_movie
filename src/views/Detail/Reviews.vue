@@ -1,7 +1,7 @@
 <template>
     <div class="reviews-container">
         <template v-if="datas.length">
-            <div v-for="review in datas" :key="review.id" class="review-card">
+            <div v-for="(review) in datas" :key="review.id" class="review-card" :class="{ 'hide-more' : review.isShowMore === true }">
                 <div class="rv-author">
                     <a :href="review.url" target="_blank" class="author-link">
                         <div class="author-avatar">&nbsp;</div>
@@ -11,6 +11,7 @@
                 <div class="rv-content">
                     {{ review.content }}
                 </div>
+                <div v-if="review.isShowMore === true" class="text-right"><div class="show-more" @click="showMore(review)">...More</div></div>
             </div>
         </template>
         <template v-else>
@@ -43,11 +44,25 @@ export default {
                         if (res.data) {
                             this.currentPage = res.data.page;
                             this.datas = res.data.results;
+                            this.datas.map((r) => {
+                                this.$set(r, 'isShowMore', false);
+                            });
                             this.totalPages = res.data.total_pages;
                             this.totalResults = res.data.total_results;
+                            this.$nextTick(() => {
+                                this.datas.map((r, index) => {
+                                    let overHowMuch = document.getElementsByClassName('rv-content')[index].scrollHeight;
+                                    if (overHowMuch > 95)  {
+                                        this.$set(r, 'isShowMore', true);
+                                    }
+                                });
+                            })
                         }
-                    })
+                    });
             }
+        },
+        showMore(r) {
+            r.isShowMore = false;
         }
     }
 }
@@ -67,6 +82,24 @@ export default {
         }
         // .author-avatar {}
         // .author-name {}
+    }
+
+    .rv-content {
+        margin-bottom: 5px;
+    }
+    &.hide-more {
+        .rv-content {
+            max-height: 95px;
+            overflow: hidden;
+        }
+    }
+    .show-more {
+        font-size: 12px;
+        color: #fff;
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }
 </style>
