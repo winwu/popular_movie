@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import { CONFIG as config } from './config.js'
 import Axios from 'axios'
+import Paginate from 'vuejs-paginate'
 import Rx from 'rxjs/Rx'
 import VueRx from 'vue-rx'
 import Vue from 'vue'
@@ -15,6 +16,9 @@ Object.defineProperty(Vue.prototype, '$conf', { value: config });
 Vue.prototype.$http = Axios;
 
 Vue.use(VueRx, Rx)
+
+// register pagination globally.
+Vue.component('paginate', Paginate)
 
 new Vue({
   router,
