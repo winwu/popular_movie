@@ -1,16 +1,16 @@
 <template>
     <div id="detail">
         <div v-if="movie" class="detail-has-data">
-            <div class="detail-banner" :style="{ backgroundImage: 'url(' + 'https://image.tmdb.org/t/p/w1280' + movie.backdrop_path + ')' }">
+            <div v-if="movie.backdrop_path" class="detail-banner" :style="{ backgroundImage: 'url(' + 'https://image.tmdb.org/t/p/w1280' + movie.backdrop_path + ')' }">
                 <div class="container">
                     <div class="row">
                         <div class="col-12 col-lg-8">
                             <h1 class="movie-title">
-                                {{ movie.title }}
+                                {{ movie.original_title }}
                             </h1>
                             <div class="clearfix">
                                 <div class="float-md-left">
-                                    <img class="mb-4 poster" :src="'https://image.tmdb.org/t/p/w200' +  movie.poster_path" :srcset="'https://image.tmdb.org/t/p/w400' +  movie.poster_path + ' 2x'" :alt="movie.title">
+                                    <img v-if="movie.poster_path" class="mb-4 poster" :src="'https://image.tmdb.org/t/p/w200' +  movie.poster_path" :srcset="'https://image.tmdb.org/t/p/w400' +  movie.poster_path + ' 2x'" :alt="movie.title">
                                 </div>
                                 <div class="float-md-left movie-infos">
                                     <div class="movie-rel">
