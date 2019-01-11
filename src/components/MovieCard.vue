@@ -2,17 +2,17 @@
     <router-link class="movie-card" :to="{ name: 'movie_detail', params: { movieId: movie.id } }" :style="{ backgroundImage: 'url(' + 'https://image.tmdb.org/t/p/w500/' + movie.poster_path + ')' }">
         <div class="movie-pos-btm">
             <h2 class="movie-title">{{ movie.title }}</h2>
-            <div data="vote_average">{{ movie.vote_average }}</div>
+			<div class="vote-average">{{ movie.vote_average }}</div>
         </div>
     </router-link>
 </template>
 
 <script>
 export default {
-    name: 'MovieCard',
-    props: {
-    	movie: Object
-  	},
+	name: 'MovieCard',
+	props: {
+		movie: Object
+	},
   	/*data() {
     	return {
       		datas: []
@@ -21,7 +21,6 @@ export default {
   	mounted() {
 	},
 	methods: {
-
 	}
 }
 </script>
@@ -35,31 +34,39 @@ export default {
 	color: #fff;
 	padding: 20px;
 	position: relative;
+	overflow: hidden;
     &:hover {
-        &:before {
-            background: -webkit-linear-gradient(to bottom, rgba(17, 17, 17, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
-            background: linear-gradient(to bottom, rgba(17, 17, 17, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
-        }
+		color: #fff;
     }
 	&:before {
 		content: ' ';
 		position: absolute;
-		top: 0;
+		top: 50%;
 		left: 0;
-		width: 100%;
-		height: 100%;
+		width: 101%;
+		height: 50%;
 		pointer-events: none;
-        transition: background .3s ease-in;
-		background: -webkit-linear-gradient(to bottom, rgba(17, 17, 17, 0.2) 0%, rgba(0, 0, 0, 0.83) 100%);
-        background: linear-gradient(to bottom, rgba(17, 17, 17, 0.2) 0%, rgba(0, 0, 0, 0.83) 100%);
+		background: linear-gradient(to bottom, rgba(17, 17, 17, 0) 0%, rgba(17, 17, 17, 0.75) 25%, rgba(0, 0, 0, 0.95) 100%);
 	}
 	.movie-pos-btm {
 		position: absolute;
 		bottom: 0;
 		text-align: center;
 		width: 100%;
-		padding: 80px;
+		padding: 50px;
 		left: 0;
+		.vote-average {
+			border: 1px solid #FFC107;
+			width: 80px;
+			height: 80px;
+			border-radius: 100%;
+			margin: 0 auto;
+			color: #FFC107;
+			line-height: 80px;
+			font-size: 24px;
+			font-weight: lighter;
+			margin-top: 20px;
+		}
 	}
 }
 </style>

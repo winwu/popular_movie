@@ -1,7 +1,7 @@
 <template>
   	<div id="home" class="container">
 		  <div v-if="populars" class="row no-gutters">
-			<div v-for="movie in populars" :key="movie.id" class="col-12 col-md-6 col-lg-4">
+			<div v-for="movie in populars" :key="movie.id" class="col-12 col-md-6 col-lg-3">
 				<movie-card :movie="movie"></movie-card>
 			</div>
 		  </div>
