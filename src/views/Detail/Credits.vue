@@ -16,12 +16,25 @@
             </div>
         </template>
         <template v-else>
-            <div class="no-data-b mt-4 mb-4 p-2">No data.</div>
+            <div class="row mt-4 mb-4">
+                <div v-for="n in 12" :key="n" class="col-12 col-md-4 col-lg-3">
+                     <content-loader
+                        :height="40"
+                        :width="220"
+                        :speed="2"
+                        primaryColor="#333"
+                        secondaryColor="#666">
+                        <rect x="7" y="6" rx="4" ry="4" width="117" height="6.4" />
+                        <rect x="7" y="21" rx="3" ry="3" width="85" height="6.4" />
+                    </content-loader>
+                </div>
+            </div>
         </template>
     </div>
 </template>
 
 <script>
+import { ContentLoader } from "vue-content-loader"
 export default {
     name: 'detail-credit',
     data() {
@@ -29,6 +42,9 @@ export default {
             loaded: false,
             datas: []
         }
+    },
+    components: {
+        ContentLoader
     },
     methods: {
         fetchCredits() {
