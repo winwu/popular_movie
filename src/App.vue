@@ -4,6 +4,21 @@
 		<main>
 			<router-view/>
 		</main>
+		<footer id="footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 col-md-6">
+						<div class="d-inline-block">
+							This is footer.
+						</div>
+						<ul class="list-inline d-inline-block">
+							<router-link tag="li" active-class="active" to="/" class="list-inline-item" exact><a class="nav-link">Home</a></router-link>
+							<router-link tag="li" active-class="active" to="/about" class="list-inline-item"><a class="nav-link">About</a></router-link>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</footer>
   	</div>
 </template>
 
@@ -51,6 +66,12 @@ main {
 .page-item.active .page-link {
 	background: transparent;
 	color: #FFC107;
+}
+#footer {
+	a {
+		color: #eee;
+		font-size: 12px;
+	}
 }
 </style>
 

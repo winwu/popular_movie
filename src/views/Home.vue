@@ -3,17 +3,15 @@
 		<div v-if="populars" class="row no-gutters">
 			<template v-if="loaded === true">
 				<div v-for="n in 8" :key="n" class="col-12 col-md-6 col-lg-3">
-					<div v-for="n in 8" :key="n" class="col-12 col-md-6 col-lg-3">
-					<content-loader
-							:height="500"
-							:width="352"
-							:speed="2"
-							primaryColor="#333"
-							secondaryColor="#666">
-							<rect x="52.5" y="294.63" rx="3" ry="3" width="241.29800000000003" height="20.581300000000002" />
-							<circle cx="172.2938280534213" cy="401.5938280534213" r="47.793828053421294" />
-						</content-loader>
-					</div>
+				<content-loader
+						:height="500"
+						:width="352"
+						:speed="2"
+						primaryColor="#333"
+						secondaryColor="#666">
+						<rect x="52.5" y="294.63" rx="3" ry="3" width="241.29800000000003" height="20.581300000000002" />
+						<circle cx="172.2938280534213" cy="401.5938280534213" r="47.793828053421294" />
+					</content-loader>
 				</div>
 			</template>
 			<template v-else>

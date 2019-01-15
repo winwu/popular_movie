@@ -19,7 +19,7 @@
 				<div class="search-card-right">
 					<div>
 						<div class="item-type">Movie</div>
-						<div class="item-name">{{ item.original_title }}</div>
+						<div class="item-name">{{ item.title }}</div>
 					</div>
 					<div class="item-desc">
 						{{ item.overview }}

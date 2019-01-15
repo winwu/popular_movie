@@ -8,10 +8,21 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        <router-link tag="li" active-class="active" to="/" class="nav-item" exact><a class="nav-link">Home</a></router-link>
-                        <router-link tag="li" active-class="active" to="/about" class="nav-item"><a class="nav-link">About</a></router-link>
+                        <!-- <router-link tag="li" active-class="active" to="/" class="nav-item" exact><a class="nav-link">Home</a></router-link>
+                        <router-link tag="li" active-class="active" to="/about" class="nav-item"><a class="nav-link">About</a></router-link> -->
+                        <li>
+                            <search-bar></search-bar>
+                        </li> 
                     </ul>
-                    <search-bar></search-bar>
+                    <div class="dropdown mr-2">
+                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            zh-TW
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <button class="dropdown-item" type="button">en-US</button>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </nav>

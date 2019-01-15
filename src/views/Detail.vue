@@ -6,7 +6,7 @@
                     <div class="row">
                         <div class="col-12 col-lg-8">
                             <h1 class="movie-title">
-                                {{ movie.original_title }}
+                                {{ movie.title }}
                             </h1>
                             <div class="clearfix">
                                 <div class="float-md-left">
