@@ -20,7 +20,7 @@ export default {
 	}*/
 }
 </script>
-<style>
+<style lang="scss">
 body {
 	font-family: 'Open Sans', 'Noto Sans', sans-serif;
 	background: #111;
@@ -34,6 +34,23 @@ main {
 	.container {
 		max-width: 1440px;
 	}
+}
+.page-link {
+	outline: none;
+	background: transparent;
+	border: none;
+	color: #fff;
+	border-radius: none;
+	&:hover {
+		background: transparent;
+	}	
+}
+.page-item.disabled .page-link {
+	background: transparent;
+}
+.page-item.active .page-link {
+	background: transparent;
+	color: #FFC107;
 }
 </style>
 
