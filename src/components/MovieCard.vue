@@ -1,5 +1,5 @@
 <template>
-    <router-link class="movie-card" :to="{ name: 'movie_detail', params: { movieId: movie.id } }" :style="{ backgroundImage: 'url(' + 'https://image.tmdb.org/t/p/w500/' + movie.poster_path + ')' }">
+    <router-link class="movie-card" :to="{ name: 'movie_detail', params: { movieId: movie.id } }" :style="{ backgroundImage: 'url(' + $conf.IMAGE_BASE_URL + 'w500/' + movie.poster_path + ')' }">
         <div class="movie-pos-btm">
             <h2 class="movie-title">{{ movie.title }}</h2>
 			<div class="vote-average">{{ movie.vote_average }}</div>

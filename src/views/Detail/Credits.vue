@@ -20,7 +20,7 @@
                 <div v-for="cast in datas" :key="cast.id" class="col-12 col-md-4 col-lg-3">
                     <div class="cast-card">
                         <!-- <div class="cast-pic">
-                            <img v-if="cast.profile_path" :src="'https://image.tmdb.org/t/p/w154' + cast.profile_path" :alt="cast.name">
+                            <img v-if="cast.profile_path" :src=" $conf.IMAGE_BASE_URL + 'w154' + cast.profile_path" :alt="cast.name">
                         </div> -->
                         <div class="cast-btm">
                             <div class="cast-anme">{{ cast.name }}</div>
