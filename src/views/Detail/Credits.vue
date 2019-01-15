@@ -30,9 +30,6 @@ export default {
             datas: []
         }
     },
-    mounted() {
-        this.fetchCredits();
-    },
     methods: {
         fetchCredits() {
             let movieId = this.$route.params.movieId;
@@ -46,6 +43,14 @@ export default {
                         }
                     })
             }
+        }
+    },
+    watch: {
+        '$route.params.movieId': {
+            handler: function() {
+                this.fetchCredits();
+            },
+            immediate: true
         }
     }
 }

@@ -82,6 +82,7 @@
                                 </li>
                             </ul>
                             <div class="section-content">
+                                <!--when sub compoent active, next movie will call 3 times api.-->
                                 <keep-alive>
                                     <component :is="dynamicComponent"></component>
                                 </keep-alive>
@@ -138,7 +139,7 @@ export default {
         async fetchAll(movieId) {
             if (movieId) {
                 this.fetchDetail(movieId);
-                this.fetchVideo(movieId);
+                //this.fetchVideo(movieId);
                 // this.fetchPhoto(movieId);
             }
         },
@@ -156,7 +157,7 @@ export default {
                     })
             }
         },
-        fetchVideo(movieId) {
+        /*fetchVideo(movieId) {
             if (movieId) {
                 this.$http
                     .get(`${ this.$conf.API_DOMAIN }movie/${ movieId }/videos?api_key=${ this.$conf.API_KEY }`)
@@ -166,7 +167,7 @@ export default {
                         }
                     })
             }
-        },
+        },*/
         /*fetchPhoto() {
             let movieId = this.$route.params.movieId;
             if (movieId) {
@@ -192,15 +193,23 @@ export default {
         }
     },
     beforeRouteEnter(to, from, next) {
-        let movieId = to.params.movieId ? to.params.movieId : null;
-        next(async vm => {
-            await vm.fetchAll(movieId);
-        })
+        if (from.params.movieId !== to.params.movieId) {
+            let movieId = to.params.movieId ? to.params.movieId : null;
+            next(async vm => {
+                await vm.fetchAll(movieId);
+            })
+        } else {
+            next()
+        }
     },
     async beforeRouteUpdate (to, from, next) {
-        let movieId = to.params.movieId ? to.params.movieId : null;
-        await this.fetchAll(movieId);
-        next()
+        if (from.params.movieId !== to.params.movieId) {
+            let movieId = to.params.movieId ? to.params.movieId : null;
+            await this.fetchAll(movieId);
+            next()
+        } else {
+            next()
+        }
     }
 }
 </script>

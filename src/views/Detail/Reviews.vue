@@ -31,9 +31,6 @@ export default {
             totalResults: null
         }
     },
-    mounted() {
-        this.fetchReviews();
-    },
     methods: {
         fetchReviews() {
             let movieId = this.$route.params.movieId;
@@ -63,6 +60,14 @@ export default {
         },
         showMore(r) {
             r.isShowMore = false;
+        }
+    },
+    watch: {
+        '$route.params.movieId': {
+            handler: function() {
+                this.fetchReviews();
+            },
+            immediate: true
         }
     }
 }
