@@ -1,6 +1,6 @@
 <template>
 	<transition v-if="active === true" name="modal">
-		<div class="modal-mask" @click.stop="clickMask">
+		<div class="modal-mask" @click.stop="clickMask" tabindex="-1" role="dialog">
 			<div id="click-mask-area" class="modal-wrapper" :class="appendClass">
 				<div class="modal-container">
 					<button @click.prevent="close" class="close_btn"><i class="far fa-times-circle"></i></button>
