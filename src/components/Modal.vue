@@ -3,7 +3,7 @@
 		<div class="modal-mask" @click.stop="clickMask">
 			<div id="click-mask-area" class="modal-wrapper" :class="appendClass">
 				<div class="modal-container">
-					<button @click.prevent="close" class="close_btn"></button>
+					<button @click.prevent="close" class="close_btn"><i class="far fa-times-circle"></i></button>
 					<div class="dis-table">
 						<div class="dis-table-cell">
 							<slot name="header">
@@ -44,34 +44,12 @@ export default {
             var $body = $('body');
             if (value === true) {
                 $body.classList.add('modal-open');
-                $body.style.paddingRight = `${this.scrollBarWidth()}px`;
 			} else {
                 $body.classList.remove('modal-open');
-                $body.style.paddingRight = '0px';
 			}
 		}
 	},
 	methods: {
-        scrollBarWidth() {
-            var outer = document.createElement("div");
-            outer.style.visibility = "hidden";
-            outer.style.width = "100px";
-            outer.style.msOverflowStyle = "scrollbar"; // needed for WinJS apps
-            document.body.appendChild(outer);
-            var widthNoScroll = outer.offsetWidth;
-            // force scrollbars
-            outer.style.overflow = "scroll";
-            // add innerdiv
-            var inner = document.createElement("div");
-            inner.style.width = "100%";
-            outer.appendChild(inner);
-
-            var widthWithScroll = inner.offsetWidth;
-
-            // remove divs
-            outer.parentNode.removeChild(outer);
-            return widthNoScroll - widthWithScroll;
-        },
 		open() {
 			this.active = true;
 			EventBus.$emit('modal_open');
@@ -93,7 +71,6 @@ export default {
             var $body = $('body');
             if ($body.classList.value.includes('modal-open') === true) {
                 $body.classList.remove('modal-open');
-                $body.style.paddingRight = '0px';
             }
 		}
 	},
@@ -106,9 +83,7 @@ export default {
 <style lang="scss">
 
 body.modal-open {
-	padding-right: 15px;
 	overflow: hidden;
-	box-sizing: border-box;
 }
 
 .modal-mask {
@@ -120,26 +95,22 @@ body.modal-open {
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.7);
     transition: opacity .33s ease;
-	// overflow-y: scroll;
 	.close_btn {
 		z-index: 20;
 		border: none;
+		font-size: 40px;
+		color: #FFC107;
 		position: absolute;
 		display: inline-block;
-		overflow: hidden;
 		background: transparent;
-		right: 0px;
-		top: -44px;
+		right: -5px;
+		top: -74px;
 		width: 44px;
 		height: 44px;
-		opacity: 0.65;
-		background-position: center right;
-		background-size: 13px 13px;
 		outline: none;
 		cursor: pointer;
-		font-size: 0;
 		&:hover {
-			opacity: 1;
+			color: #fff;
 		}
 	}
 }
@@ -153,7 +124,7 @@ body.modal-open {
     top: 0;
     padding: 0 8px;
     box-sizing: border-box;
-    overflow-y: scroll;
+    overflow: hidden;
     &:before {
         content: '';
         display: inline-block;
@@ -174,7 +145,6 @@ body.modal-open {
     margin: 40px auto;
     border-radius: 0;
     border: 7px solid #FFC107;
-    overflow: hidden;
 	.modal-body {
 		max-height: 60vh;
 		overflow-y: auto;

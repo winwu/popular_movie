@@ -100,14 +100,14 @@ export default {
 	name: 'movie-detail',
 	components: {
         'async-detail-reviews': () => ({
-            component: import('@/views/Detail/Reviews.vue'),
+            component: import(/* webpackChunkName: "detail_reviews" */'@/views/Detail/Reviews.vue'),
             loading:  { template: `<h1>Loading...</h1>` },
             error: { template: `<h1>Error, Sorry!</h1>` },
             delay: 30000,
             timeout: 6000
         }),
-        'async-detail-credits': () => import('@/views/Detail/Credits.vue'),
-        'async-detail-videos': () => import('@/views/Detail/Videos.vue')
+        'async-detail-credits': () => import(/* webpackChunkName: "detail_credits" */'@/views/Detail/Credits.vue'),
+        'async-detail-videos': () => import(/* webpackChunkName: "detail_about" */'@/views/Detail/Videos.vue')
     },
 	data() {
         return {

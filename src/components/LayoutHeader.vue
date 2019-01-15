@@ -30,6 +30,9 @@ export default {
 
 <style lang="scss" scoped>
     #header {
+        .fixed-top {
+            z-index: 5;
+        }
         .navbar {
             background: rgba(17, 17, 17, 0.9);
         }
