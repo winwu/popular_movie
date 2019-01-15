@@ -1,21 +1,6 @@
 <template>
     <div class="credit-container">
-        <template v-if="loaded && datas.length">
-            <div class="row mt-4 mb-4">
-                <div v-for="cast in datas" :key="cast.id" class="col-12 col-md-4 col-lg-3">
-                    <div class="cast-card">
-                        <!-- <div class="cast-pic">
-                            <img v-if="cast.profile_path" :src="'https://image.tmdb.org/t/p/w154' + cast.profile_path" :alt="cast.name">
-                        </div> -->
-                        <div class="cast-btm">
-                            <div class="cast-anme">{{ cast.name }}</div>
-                            <div class="cast-character">{{ cast.character }}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </template>
-        <template v-else>
+        <template v-if="loaded === true">
             <div class="row mt-4 mb-4">
                 <div v-for="n in 12" :key="n" class="col-12 col-md-4 col-lg-3">
                      <content-loader
@@ -27,6 +12,21 @@
                         <rect x="7" y="6" rx="4" ry="4" width="117" height="6.4" />
                         <rect x="7" y="21" rx="3" ry="3" width="85" height="6.4" />
                     </content-loader>
+                </div>
+            </div>
+        </template>
+        <template v-else>
+            <div class="row mt-4 mb-4">
+                <div v-for="cast in datas" :key="cast.id" class="col-12 col-md-4 col-lg-3">
+                    <div class="cast-card">
+                        <!-- <div class="cast-pic">
+                            <img v-if="cast.profile_path" :src="'https://image.tmdb.org/t/p/w154' + cast.profile_path" :alt="cast.name">
+                        </div> -->
+                        <div class="cast-btm">
+                            <div class="cast-anme">{{ cast.name }}</div>
+                            <div class="cast-character">{{ cast.character }}</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </template>
@@ -50,13 +50,20 @@ export default {
         fetchCredits() {
             let movieId = this.$route.params.movieId;
             if (movieId) {
+                // reset
+                this.loaded = true;
+                this.datas = [];
+
+
                 this.$http
                     .get(`${ this.$conf.API_DOMAIN }movie/${ movieId }/credits?api_key=${ this.$conf.API_KEY }&language=${ this.$conf.API_LANG }&page=1`)
                     .then(res => {
                         if (res.data) {
-                            this.loaded = true;
                             this.datas = res.data.cast;
                         }
+                    })
+                    .finally(() => {
+                        this.loaded = false;
                     })
             }
         }

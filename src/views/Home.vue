@@ -1,9 +1,24 @@
 <template>
   	<div id="home" class="container">
-		  <div v-if="populars" class="row no-gutters">
-			<div v-for="movie in populars" :key="movie.id" class="col-12 col-md-6 col-lg-3">
-				<movie-card :movie="movie"></movie-card>
-			</div>
+		<div v-if="populars" class="row no-gutters">
+			<template v-if="loaded === true">
+				<div v-for="n in 8" :key="n" class="col-12 col-md-6 col-lg-3">
+					<content-loader
+						:height="500"
+						:width="352"
+						:speed="2"
+						primaryColor="#f3f3f3"
+						secondaryColor="#ecebeb">
+						<rect x="52.5" y="294.63" rx="3" ry="3" width="241.29800000000003" height="20.581300000000002" />
+						<circle cx="172.2938280534213" cy="401.5938280534213" r="47.793828053421294" />
+					</content-loader>
+				</div>
+			</template>
+			<template v-else>
+				<div v-for="movie in populars" :key="movie.id" class="col-12 col-md-6 col-lg-3">
+					<movie-card :movie="movie"></movie-card>
+				</div>
+			</template>
 
 			<template v-if="totalPages > 1">
 				<paginate
@@ -29,14 +44,17 @@
 </template>
 
 <script>
+import { ContentLoader } from "vue-content-loader"
 import MovieCard from '@/components/MovieCard.vue'
 export default {
 	name: 'home',
 	components: {
-		MovieCard
+		MovieCard,
+		ContentLoader
 	},
 	data() {
     	return {
+			loaded: false,
 			populars: [],
 			page: 1,
 			totalPages: 0
@@ -47,6 +65,9 @@ export default {
 	},
 	methods: {
 		fetchPopular() {
+			this.loaded = true;
+			this.populars = [];
+
 			this.$http
 				.get(`${ this.$conf.API_DOMAIN }movie/popular?api_key=${ this.$conf.API_KEY }&language=${ this.$conf.API_LANG }&page=${ this.page }`)
 				.then(res => {
@@ -62,6 +83,9 @@ export default {
 							}
 						}
 					}
+				})
+				.finally(() => {
+					this.loaded = false;
 				})
 		},
 		changePage(p) {

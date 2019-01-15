@@ -1,9 +1,12 @@
 <template>
     <div>
         <div class="row mt-4 mb-4">
-            <template v-if="loaded">
+            <template v-if="loaded === true">
+                loading
+            </template>
+            <template v-else>
                 <template v-if="!datas.length">
-
+                    no data
                 </template>
                 <template v-else>
                     <div v-for="(video, idx) in datas" :key="idx" class="col-12 col-lg-6">
@@ -20,9 +23,6 @@
                         </div>
                     </div>
                 </template>
-            </template>
-            <template v-else>
-                loading
             </template>
         </div>
         <modal ref="video-modal" append-class="video-modal">
@@ -53,13 +53,16 @@ export default {
         fetctVideos() {
             let movieId = this.$route.params.movieId;
             if (movieId) {
+                this.loaded = true;
                 this.$http
                     .get(`${ this.$conf.API_DOMAIN }movie/${ movieId }/videos?api_key=${ this.$conf.API_KEY }&language=${ this.$conf.API_LANG }`)
                     .then(res => {
                         if (res.data && res.data.results) {
                             this.datas = res.data.results;
-                            this.loaded = true;
                         }
+                    })
+                    .finally(() => {
+                        this.loaded = false;
                     })
             }
         },
