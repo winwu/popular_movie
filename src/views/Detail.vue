@@ -18,6 +18,7 @@
                                         <div class="badges d-inline-block">
                                             <div class="label" :class="movie.status">{{ movie.status }}</div>
                                             <a class="label website" :href="movie.homepage" target="_blank" rel="noreferrer">Website <i class="fas fa-link"></i></a>
+                                            <button class="star-btn" @click.stop.prevent="setBookmark"><i class="far fa-heart"></i></button>
                                         </div>
                                     </div>
                                     <div class="statistics">
@@ -157,17 +158,9 @@ export default {
                     })
             }
         },
-        /*fetchVideo(movieId) {
-            if (movieId) {
-                this.$http
-                    .get(`${ this.$conf.API_DOMAIN }movie/${ movieId }/videos?api_key=${ this.$conf.API_KEY }`)
-                    .then(res => {
-                        if (res.data && res.data.results) {
-                            this.videos = res.data.results;
-                        }
-                    })
-            }
-        },*/
+        setBookmark() {
+            this.$eventBus.$emit('open-login');
+        }
         /*fetchPhoto() {
             let movieId = this.$route.params.movieId;
             if (movieId) {
@@ -250,6 +243,13 @@ export default {
             margin: 50px auto;
             font-size: 76px;
         }
+    }
+    .star-btn {
+        background: transparent;
+        border: none;
+        color: #fff;
+        outline: none;
+        cursor: pointer;
     }
 }
 .movie-infos {

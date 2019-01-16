@@ -10,6 +10,8 @@ import Vue from 'vue'
 import router from './router'
 import App from './App.vue'
 
+Vue.prototype.$eventBus = new Vue()
+
 Vue.config.productionTip = false
 
 Object.defineProperty(Vue.prototype, '$conf', { value: config });

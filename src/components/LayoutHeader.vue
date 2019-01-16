@@ -12,7 +12,7 @@
                         <router-link tag="li" active-class="active" to="/about" class="nav-item"><a class="nav-link">About</a></router-link> -->
                         <li>
                             <search-bar></search-bar>
-                        </li> 
+                        </li>
                     </ul>
                     <div class="dropdown mr-2">
                         <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -22,58 +22,79 @@
                             <button class="dropdown-item" type="button">en-US</button>
                         </div>
                     </div>
-                    <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModalCenter">Login</a>
+                    <a href="#" class="btn btn-link" @click.stop.prevent="openLogin">Login</a>
                 </div>
             </div>
         </nav>
         <!-- Modal -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+        <modal ref="login-modal" append-class="login-modal">
+            <div slot="body">
+                <h2>Login</h2>
+            </div>
+            <div slot="body">
                 <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                    <form class="text-left">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-warning btn-block">Submit</button>
+                    </form>
                 </div>
             </div>
-        </div>
+        </modal>
     </header>
 </template>
 
 <script>
 import SearchBar from '@/components/SearchBar'
+import Modal from '@/components/Modal'
 export default {
     name: 'layout-header',
     components: {
-		SearchBar
-	}
+        SearchBar,
+        Modal
+    },
+    mounted() {
+        this.$eventBus.$on('open-login', () => {
+            this.$refs['login-modal'].open();
+        });
+    },
+    methods: {
+        openLogin() {
+            this.$eventBus.$emit('open-login');
+        }
+    }
 }
 </script>
 
 <style lang="scss" scoped>
-    #header {
-        .fixed-top {
-            z-index: 5;
-        }
-        .navbar {
-            background: rgba(17, 17, 17, 0.9);
-        }
-        .navbar-brand {
-            background: #FFC107;
-            font-size: 14px;
-            font-weight: bold;
-            color: #000;
-            padding: 20px 5px;
-        }
+#header {
+    .fixed-top {
+        z-index: 5;
     }
+    .navbar {
+        background: rgba(17, 17, 17, 0.9);
+    }
+    .navbar-brand {
+        background: #FFC107;
+        font-size: 14px;
+        font-weight: bold;
+        color: #000;
+        padding: 20px 5px;
+    }
+}
+</style>
 
+<style lang="scss">
+.login-modal {
+    .modal-container {
+        max-width: 400px;
+    }
+}
 </style>
