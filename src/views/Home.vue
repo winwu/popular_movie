@@ -1,20 +1,6 @@
 <template>
   	<div id="home">
-		<div class="home-slides">
-			<slick
-				ref="slick"
-				:options="slickOptions"
-				@reInit="handleReInit"
-				@lazyLoaded="handleLazyLoaded"
-				@lazyLoadError="handleLazeLoadError">
-				<div><img src="http://placehold.it/1280x800" alt=""></div>
-				<div><img src="http://placehold.it/1280x800" alt=""></div>
-				<div><img src="http://placehold.it/1280x800" alt=""></div>
-				<div><img src="http://placehold.it/1280x800" alt=""></div>
-				<div><img src="http://placehold.it/1280x800" alt=""></div>
-				<div><img src="http://placehold.it/1280x800" alt=""></div>
-			</slick>
-		</div>
+		<now-playing></now-playing>
 		<div class="container">
 			<div v-if="populars" class="row no-gutters">
 				<template v-if="loaded === true">
@@ -60,49 +46,22 @@
 </template>
 
 <script>
-import Slick from 'vue-slick'
-import "slick-carousel/slick/slick.css"
-
 import { ContentLoader } from "vue-content-loader"
 import MovieCard from '@/components/MovieCard.vue'
+import NowPlaying from '@/components/NowPlaying.vue'
 export default {
 	name: 'home',
 	components: {
-		Slick,
 		ContentLoader,
-		MovieCard
+		MovieCard,
+		NowPlaying
 	},
 	data() {
 		return {
 			loaded: false,
 			populars: [],
 			page: 1,
-			totalPages: 0,
-			slickOptions: {
-                centerMode: true,
-				centerPadding: '60px',
-				slidesToShow: 3,
-				responsive: [
-					{
-						breakpoint: 768,
-						settings: {
-							arrows: false,
-							centerMode: true,
-							centerPadding: '40px',
-							slidesToShow: 3
-						}
-					},
-					{
-						breakpoint: 480,
-						settings: {
-							arrows: false,
-							centerMode: true,
-							centerPadding: '40px',
-							slidesToShow: 1
-						}
-					}
-				]
-            }
+			totalPages: 0
 		}
 	},
 	mounted() {
@@ -137,53 +96,7 @@ export default {
 			console.warn('user want to p', p);
 			this.$set(this, 'page', p);
 			this.fetchPopular();
-		},
-		next() {
-            this.$refs.slick.next();
-        },
-        prev() {
-            this.$refs.slick.prev();
-        },
-        reInit() {
-            // Helpful if you have to deal with v-for to update dynamic lists
-            this.$nextTick(() => {
-                this.$refs.slick.reSlick();
-            });
-		},
-		handleLazyLoaded(event, slick, image, imageSource) {
-            console.log('handleLazyLoaded', event, slick, image, imageSource);
-        },
-        handleLazeLoadError(event, slick, image, imageSource) {
-            console.log('handleLazeLoadError', event, slick, image, imageSource);
-		},
-        handleReInit(event, slick) {
-            console.log('handleReInit', event, slick);
-        }
+		}
 	}
 }
 </script>
-<style lang="scss">
-.home-slides {
-	position: relative;
-	img {
-		max-width: 100%;
-	}
-	.slick-arrow {
-		position: absolute;
-		z-index: 1;
-		top: 50%;
-		height: 30px;
-		margin-top: -15px;
-		background: transparent;
-		border: none;
-		color: #fff;
-		cursor: pointer;
-	}
-	.slick-prev {
-		left: 30px;
-	}
-	.slick-next {
-		right: 30px;
-	}
-}
-</style>
