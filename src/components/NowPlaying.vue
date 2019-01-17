@@ -1,39 +1,37 @@
 <template>
-    <div>
-        <div class="container">
-            <div class="display-3 mb-4">Now Playing</div>
-        </div>
-        <div class="home-slides mb-5">
-            <slick
-                ref="slick"
-                :options="slickOptions"
-                @lazyLoaded="handleLazyLoaded"
-                @lazyLoadError="handleLazeLoadError">
-                <template v-if="loaded === false && nowPlaying.length < 1">
-                    <div class="pl-2 pr-2" v-for="n in 3" :key="n">
-                        <div class="slide-movie">
-                            <div class="movie-bp"></div>
-                        </div>
-                    </div>
-                </template>
-                <template v-else>
-                    <div class="pl-2 pr-2" v-for="movie in nowPlaying" :key="movie.id">
-                        <router-link class="slide-movie" :to="{ name: 'movie_detail', params: { movieId: movie.id } }">
-                            <!-- <div class="movie-bp" :style="{ backgroundImage: 'url(' + $conf.IMAGE_BASE_URL + 'w780' + movie.backdrop_path + ')' }"></div> -->
-                            <div class="movie-cover">
-                                <img :data-lazy="$conf.IMAGE_BASE_URL + 'w780' + movie.backdrop_path">
-                            </div>
-                            <div class="movie-btm">
-                                <h2>{{ movie.title }}</h2>
-                                <div class="movie-rd">{{ movie.release_date }}</div>
-                                <div class="movie-ov">{{ movie.overview }}</div>
-                            </div>
-                        </router-link>
-                    </div>
-                </template>
-            </slick>
-        </div>
-    </div>
+	<div>
+		<div class="container">
+			<div class="display-3 mb-4">Now Playing</div>
+		</div>
+		<div class="home-slides mb-5">
+			<slick
+				ref="slick"
+				:options="slickOptions">
+				<template v-if="loaded === false && nowPlaying.length < 1">
+					<div class="pl-2 pr-2" v-for="n in 3" :key="n">
+						<div class="slide-movie">
+							<div class="movie-bp"></div>
+						</div>
+					</div>
+				</template>
+				<template v-else>
+					<div class="pl-2 pr-2" v-for="movie in nowPlaying" :key="movie.id">
+						<router-link class="slide-movie" :to="{ name: 'movie_detail', params: { movieId: movie.id } }">
+							<!-- <div class="movie-bp" :style="{ backgroundImage: 'url(' + $conf.IMAGE_BASE_URL + 'w780' + movie.backdrop_path + ')' }"></div> -->
+							<div class="movie-cover">
+								<img :data-lazy="$conf.IMAGE_BASE_URL + 'w780' + movie.backdrop_path">
+							</div>
+							<div class="movie-btm">
+								<h2>{{ movie.title }}</h2>
+								<div class="movie-rd">{{ movie.release_date }}</div>
+								<div class="movie-ov">{{ movie.overview }}</div>
+							</div>
+						</router-link>
+					</div>
+				</template>
+			</slick>
+		</div>
+	</div>
 </template>
 <script>
 import Slick from 'vue-slick'
@@ -49,10 +47,11 @@ export default {
 			nowPlaying: [],
 			loaded: false,
 			slickOptions: {
-                centerMode: true,
+				centerMode: true,
 				centerPadding: '0px',
-                slidesToShow: 3,
-                lazyLoad: 'ondemand',
+				slidesToShow: 3,
+				lazyLoad: 'ondemand',
+				speed: 300,
 				responsive: [
 					{
 						breakpoint: 1280,
@@ -64,7 +63,7 @@ export default {
 						}
 					}
 				]
-            }
+			}
 		}
 	},
 	mounted() {
@@ -77,29 +76,29 @@ export default {
 				.get(`${ this.$conf.API_DOMAIN }movie/now_playing?api_key=${ this.$conf.API_KEY }&language=${ this.$conf.API_LANG }`)
 				.then(res => {
 					if (res.data && res.data.results) {
-                        this.nowPlaying = res.data.results;
-                        this.loaded = true;
+						this.nowPlaying = res.data.results;
+						this.loaded = true;
 					}
-                })
-                .finally(() => {
-                    this.loaded = true;
+				})
+				.finally(() => {
+					this.loaded = true;
 				})
 		},
-		handleLazyLoaded(event, slick, image, imageSource) {
-            console.log('handleLazyLoaded', event, slick, image, imageSource);
-        },
-        handleLazeLoadError(event, slick, image, imageSource) {
-            console.log('handleLazeLoadError', event, slick, image, imageSource);
+		/*handleLazyLoaded(event, slick, image, imageSource) {
+			console.log('handleLazyLoaded', image);
+		},
+		handleLazeLoadError(event, slick, image, imageSource) {
+			console.log('handleLazeLoadError', event, slick, image, imageSource);
+		}*/
+	},
+	watch: {
+		nowPlaying() {
+			this.$refs.slick.destroy()
+			this.$nextTick(() => {
+				this.$refs.slick.create()
+			})
 		}
-    },
-    watch: {
-        nowPlaying() {
-            this.$refs.slick.destroy()
-            this.$nextTick(() => {
-                this.$refs.slick.create()
-            })
-        }
-    }
+	}
 }
 </script>
 
@@ -118,9 +117,6 @@ export default {
 		top: 0;
 		background: linear-gradient(to right, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 70%,rgba(0,0,0,1) 100%);
 	}
-	img {
-		max-width: 100%;
-	}
 	// .slick-slide {}
 	.slick-arrow {
 		position: absolute;
@@ -133,15 +129,15 @@ export default {
 		color: #fff;
 		cursor: pointer;
 		outline: none;
-        min-width: 100px;
+		min-width: 100px;
 	}
 	.slick-prev {
 		left: 30px;
-        text-align: left;
+		text-align: left;
 	}
 	.slick-next {
 		right: 30px;
-        text-align: right;
+		text-align: right;
 	}
 }
 .slide-movie {
@@ -151,12 +147,23 @@ export default {
 	display: block;
 	color: #eee;
 	outline: none;
-    border-radius: 10px;
+	border-radius: 10px;
 	&:hover {
 		color: #fff;
 	}
 
-	.movie-bp {
+	.movie-cover {
+		img {
+			// slick.js will set opacity to 1
+			opacity: 0;
+			width: 100%;
+			object-fit: cover;
+			height: 100%;
+		}
+	}
+
+	.movie-bp,
+	.movie-cover {
 		position: absolute;
 		width: 100%;
 		height: 100%;
