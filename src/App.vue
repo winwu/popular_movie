@@ -23,16 +23,23 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import LayoutHeader from '@/components/LayoutHeader'
 export default {
 	name: 'app',
 	components: {
 		LayoutHeader
 	},
-	/* data() {
-    	return {
-    	}
-	}*/
+	computed: {
+		...mapState({
+			clang: state => state.preference.checkedLang
+		}),
+	},
+	watch: {
+		clang() {
+			console.warn('lang change');
+		}
+	}
 }
 </script>
 <style lang="scss">
@@ -58,7 +65,7 @@ main {
 	border-radius: none;
 	&:hover {
 		background: transparent;
-	}	
+	}
 }
 .page-item.disabled .page-link {
 	background: transparent;

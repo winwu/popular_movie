@@ -8,6 +8,7 @@ import Rx from 'rxjs/Rx'
 import VueRx from 'vue-rx'
 import Vue from 'vue'
 import router from './router'
+import store from './store'
 import App from './App.vue'
 
 Vue.prototype.$eventBus = new Vue()
@@ -22,8 +23,11 @@ Vue.use(VueRx, Rx)
 // register pagination globally.
 Vue.component('paginate', Paginate)
 
+store.dispatch('preference/getInitLangAction')
+
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')
 
