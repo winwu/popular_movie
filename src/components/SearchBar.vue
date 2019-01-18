@@ -64,7 +64,7 @@ export default {
 				} else {
 					// 發 api
 					return Observable
-						.fromPromise(this.$http.get(`${ this.$conf.API_DOMAIN }search/movie?api_key=${ this.$conf.API_KEY }&include_adult=false&query=${ keyword }&language=${ this.$conf.API_LANG }&page=1`))
+						.fromPromise(this.$http.get(`${ this.$conf.API_DOMAIN }search/movie?include_adult=false&query=${ keyword }&page=1`))
 						.flatMap((res) => {
 							console.info('res', res);
 							if (+res.status === 200 && res.data && res.data.results.length > 0) {

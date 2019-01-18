@@ -32,12 +32,12 @@ export default {
 	},
 	computed: {
 		...mapState({
-			clang: state => state.preference.checkedLang
+			lang: state => state.preference.checkedLang
 		}),
 	},
 	watch: {
-		clang() {
-			console.warn('lang change');
+		lang() {
+			window.location.reload();
 		}
 	}
 }

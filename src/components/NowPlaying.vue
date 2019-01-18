@@ -73,7 +73,7 @@ export default {
 		fetchNowPlaying() {
 			this.nowPlaying = [];
 			this.$http
-				.get(`${ this.$conf.API_DOMAIN }movie/now_playing?api_key=${ this.$conf.API_KEY }&language=${ this.$conf.API_LANG }`)
+				.get(`${ this.$conf.API_DOMAIN }movie/now_playing`)
 				.then(res => {
 					if (res.data && res.data.results) {
 						this.nowPlaying = res.data.results;

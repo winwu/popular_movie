@@ -56,7 +56,7 @@ export default {
 
 
                 this.$http
-                    .get(`${ this.$conf.API_DOMAIN }movie/${ movieId }/credits?api_key=${ this.$conf.API_KEY }&language=${ this.$conf.API_LANG }&page=1`)
+                    .get(`${ this.$conf.API_DOMAIN }movie/${ movieId }/credits?page=1`)
                     .then(res => {
                         if (res.data) {
                             this.datas = res.data.cast;

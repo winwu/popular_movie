@@ -36,7 +36,7 @@ export default {
             let movieId = this.$route.params.movieId;
             if (movieId) {
                 this.$http
-                    .get(`${ this.$conf.API_DOMAIN }movie/${ movieId }/reviews?api_key=${ this.$conf.API_KEY }&language=${ this.$conf.API_LANG }&page=1`)
+                    .get(`${ this.$conf.API_DOMAIN }movie/${ movieId }/reviews?page=1`)
                     .then(res => {
                         if (res.data) {
                             this.currentPage = res.data.page;

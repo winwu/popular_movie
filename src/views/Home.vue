@@ -74,7 +74,7 @@ export default {
 			this.populars = [];
 
 			this.$http
-				.get(`${ this.$conf.API_DOMAIN }movie/popular?api_key=${ this.$conf.API_KEY }&language=${ this.$conf.API_LANG }&page=${ this.page }`)
+				.get(`${ this.$conf.API_DOMAIN }movie/popular?page=${ this.page }`)
 				.then(res => {
 					console.log('res', res);
 					if (res.data && res.data.results) {

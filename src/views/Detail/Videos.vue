@@ -55,7 +55,7 @@ export default {
             if (movieId) {
                 this.loaded = true;
                 this.$http
-                    .get(`${ this.$conf.API_DOMAIN }movie/${ movieId }/videos?api_key=${ this.$conf.API_KEY }&language=${ this.$conf.API_LANG }`)
+                    .get(`${ this.$conf.API_DOMAIN }movie/${ movieId }/videos`)
                     .then(res => {
                         if (res.data && res.data.results) {
                             this.datas = res.data.results;

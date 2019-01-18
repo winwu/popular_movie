@@ -150,7 +150,7 @@ export default {
 		fetchDetail(movieId) {
             if (movieId) {
                 this.$http
-                    .get(`${ this.$conf.API_DOMAIN }movie/${ movieId }?api_key=${ this.$conf.API_KEY }&language=${ this.$conf.API_LANG }`)
+                    .get(`${ this.$conf.API_DOMAIN }movie/${ movieId }`)
                     .then(res => {
                         if (res.data) {
                             this.movie = res.data;
@@ -165,7 +165,7 @@ export default {
             let movieId = this.$route.params.movieId;
             if (movieId) {
                 this.$http
-                    .get(`${ this.$conf.API_DOMAIN }movie/${ movieId }/images?api_key=${ this.$conf.API_KEY }`)
+                    .get(`${ this.$conf.API_DOMAIN }movie/${ movieId }/images`)
                     .then(res => {
                         if (res.data && res.data.results) {
                             this.videos = res.data.results;
