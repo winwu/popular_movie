@@ -15,11 +15,11 @@
                         </li>
                     </ul>
                     <div class="dropdown mr-2">
-                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            zh-TW
+                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownLangMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ checkedLangObj.text }}
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <button class="dropdown-item" type="button">en-US</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownLangMenu">
+                            <button v-for="lang in langList" :key="lang.key" class="dropdown-item" type="button" :class="{ disabled: lang.key === checkedLang }" @click.prevent="setLangAction(lang.key)">{{ lang.text }}</button>
                         </div>
                     </div>
                     <a href="#" class="btn btn-link" @click.stop.prevent="openLogin">Login</a>
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import { mapGetters, mapState, mapActions  } from 'vuex'
 import SearchBar from '@/components/SearchBar'
 import Modal from '@/components/Modal'
 export default {
@@ -60,12 +61,28 @@ export default {
         SearchBar,
         Modal
     },
+    data() {
+		return {
+		}
+    },
+    computed: {
+		...mapState({
+            langList: state => state.preference.langList,
+            checkedLang: state => state.preference.checkedLang
+        }),
+        ...mapGetters('preference', {
+            checkedLangObj: 'checkedLangObj'
+        })
+	},
     mounted() {
         this.$eventBus.$on('open-login', () => {
             this.$refs['login-modal'].open();
         });
     },
     methods: {
+        ...mapActions('preference', [
+            'setLangAction'
+        ]),
         openLogin() {
             this.$eventBus.$emit('open-login');
         }
