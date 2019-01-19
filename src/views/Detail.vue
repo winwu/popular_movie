@@ -97,6 +97,7 @@
 </template>
 
 <script>
+import { mapState  } from 'vuex'
 export default {
 	name: 'movie-detail',
 	components: {
@@ -123,9 +124,11 @@ export default {
         } else {
             this.currentTab = 'reviews';
         }
-
     },
     computed: {
+        ...mapState({
+			isLogin: state => state.auth.isLogin
+		}),
         dynamicComponent() {
             if (this.currentTab === 'credits') {
                 return 'async-detail-credits';
@@ -159,7 +162,11 @@ export default {
             }
         },
         setBookmark() {
-            this.$eventBus.$emit('open-login');
+            if (this.isLogin) {
+                alert('added to favirote')
+            } else {
+                this.$eventBus.$emit('open-login');
+            }
         }
         /*fetchPhoto() {
             let movieId = this.$route.params.movieId;

@@ -12,14 +12,19 @@
 				</div> -->
 				<div id="genre-list" class="clearfix">
 					<div id="genre-list-content">
-						<genre-card v-for="g in genres" :key="g.id" :data="g"></genre-card>
+						<template v-if="loaded.genres === true">
+							<genre-card v-for="n in 19" :key="n"></genre-card>
+						</template>
+						<template v-else>
+							<genre-card v-for="g in genres" :key="g.id" :data="g"></genre-card>
+						</template>
 					</div>
 				</div>
 			</div>
 		</section>
 		<div class="container">
 			<div v-if="populars" class="row no-gutters">
-				<template v-if="loaded === true">
+				<template v-if="loaded.populars === true">
 					<div v-for="n in 8" :key="n" class="col-12 col-md-6 col-lg-3">
 						<content-loader
 							:height="500"
@@ -76,7 +81,10 @@ export default {
 	},
 	data() {
 		return {
-			loaded: false,
+			loaded: {
+				populars: false,
+				genres: false
+			},
 			populars: [],
 			page: 1,
 			totalPages: 0,
@@ -89,7 +97,7 @@ export default {
 	},
 	methods: {
 		fetchPopular() {
-			this.loaded = true;
+			this.loaded.populars = true;
 			this.populars = [];
 
 			this.$http
@@ -109,19 +117,21 @@ export default {
 					}
 				})
 				.finally(() => {
-					this.loaded = false;
+					this.loaded.populars = false;
 				})
 		},
 		fetchGenre() {
+			this.loaded.genres = true;
 			this.$http
-				.get(`${ this.$conf.API_DOMAIN }genre/movie/list`)
-				.then(res => {
-					if (res.data && res.data.genres) {
-						this.genres = res.data.genres;
-					}
-				})
-				.finally(() => {
-				})
+			.get(`${ this.$conf.API_DOMAIN }genre/movie/list`)
+			.then(res => {
+				if (res.data && res.data.genres) {
+					this.genres = res.data.genres;
+				}
+			})
+			.finally(() => {
+				this.loaded.genres = false;
+			})
 		},
 		changePage(p) {
 			console.warn('user want to p', p);

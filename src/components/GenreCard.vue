@@ -1,6 +1,6 @@
 <template>
-    <div class="genre-card" :style="{ background: stringToHslColor(data.name, 10, 50) }">
-        {{ data.name }}
+    <div class="genre-card" :style="{ background: data.name ? stringToHslColor(data.name, 10, 50) : '#000' }">
+        <template v-if="data.name">{{ data.name }}</template>
     </div>
 </template>
 
@@ -10,7 +10,10 @@ export default {
     props: {
         data: {
             type: Object,
-            required: true
+            default: {
+                name: '',
+                id: ''
+            }
         }
     },
     methods: {
@@ -35,6 +38,8 @@ export default {
     border-radius: 4px;
     margin: 0 10px 0 0;
     font-size: 14px;
+    min-width: 80px;
+    height: 40px;
     cursor: pointer;
 }
 </style>
