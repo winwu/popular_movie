@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import { EventBus } from '@/EventBus'
 export default {
 	name: 'modal',
 	data() {
@@ -52,11 +51,11 @@ export default {
 	methods: {
 		open() {
 			this.active = true;
-			EventBus.$emit('modal_open');
+			this.$eventBus.$emit('modal_open');
 		},
 		close() {
 			this.active = false;
-			EventBus.$emit('modal_close', { modalId: this.modalId });
+			this.$eventBus.$emit('modal_close', { modalId: this.modalId });
 		},
 		clickMask(e) {
 			// 點擊遮罩
