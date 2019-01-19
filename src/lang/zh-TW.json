@@ -3,7 +3,8 @@
         "hello": "嗨! {name}",
         "login": "登入",
         "logout": "登出",
-        "search_placeholder": "找電影?"
+        "search_placeholder": "找電影?",
+        "genre": "Genre"
     },
     "login": {
         "email_address": "電子信箱",

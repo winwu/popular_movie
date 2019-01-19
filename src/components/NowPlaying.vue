@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<div class="container">
-			<div class="display-3 mb-4">{{ $t('home.now_playing') }}</div>
+			<div class="display-3 mb-4 title-nth-1">{{ $t('home.now_playing') }}</div>
 		</div>
-		<div class="home-slides mb-5">
+		<div class="home-slides mb-3">
 			<slick
 				ref="slick"
 				:options="slickOptions">
@@ -104,6 +104,11 @@ export default {
 
 
 <style lang="scss">
+.title-nth-1 {
+	background: -webkit-linear-gradient(#03A9F4, #8BC34A);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
 .home-slides {
 	position: relative;
 

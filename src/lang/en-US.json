@@ -1,9 +1,10 @@
 {
     "common": {
-        "hello": "Hi! { name }",
+        "hello": "Hi! {name}",
         "login": "Login",
         "logout": "Logout",
-        "search_placeholder": "Search Movie?"
+        "search_placeholder": "Search Movie?",
+        "genre": "Genre"
     },
     "login": {
         "email_address": "E-mail",

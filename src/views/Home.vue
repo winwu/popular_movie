@@ -1,6 +1,22 @@
 <template>
   	<div id="home">
 		<now-playing></now-playing>
+		<section id="genre-sec">
+			<div class="container mt-3">
+				<div class="display-3 mb-2 title-nth-2">{{ $t('common.genre') }}</div>
+			</div>
+			<div class="container mb-5 position-relative">
+				<!-- <div>
+					<i id="genre-left" class="fas fa-angle-left"></i>
+					<i id="genre-right" class="fas fa-angle-right"></i>
+				</div> -->
+				<div id="genre-list" class="clearfix">
+					<div id="genre-list-content">
+						<genre-card v-for="g in genres" :key="g.id" :data="g"></genre-card>
+					</div>
+				</div>
+			</div>
+		</section>
 		<div class="container">
 			<div v-if="populars" class="row no-gutters">
 				<template v-if="loaded === true">
@@ -49,23 +65,27 @@
 import { ContentLoader } from "vue-content-loader"
 import MovieCard from '@/components/MovieCard.vue'
 import NowPlaying from '@/components/NowPlaying.vue'
+import GenreCard from '@/components/GenreCard.vue'
 export default {
 	name: 'home',
 	components: {
 		ContentLoader,
 		MovieCard,
-		NowPlaying
+		NowPlaying,
+		GenreCard
 	},
 	data() {
 		return {
 			loaded: false,
 			populars: [],
 			page: 1,
-			totalPages: 0
+			totalPages: 0,
+			genres: []
 		}
 	},
 	mounted() {
 		this.fetchPopular();
+		this.fetchGenre();
 	},
 	methods: {
 		fetchPopular() {
@@ -92,6 +112,17 @@ export default {
 					this.loaded = false;
 				})
 		},
+		fetchGenre() {
+			this.$http
+				.get(`${ this.$conf.API_DOMAIN }genre/movie/list`)
+				.then(res => {
+					if (res.data && res.data.genres) {
+						this.genres = res.data.genres;
+					}
+				})
+				.finally(() => {
+				})
+		},
 		changePage(p) {
 			console.warn('user want to p', p);
 			this.$set(this, 'page', p);
@@ -100,3 +131,49 @@ export default {
 	}
 }
 </script>
+
+<style lang="scss" scoped>
+#genre-sec {
+	.title-nth-2 {
+		background: -webkit-linear-gradient(#8BC34A, #607D8B);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+	#genre-list-content {
+		float: left;
+		transition: transform .2s ease-in-out;
+	}
+	.no-transition {
+		transition: none;
+	}
+	#genre-list {
+		position: relative;
+		overflow: hidden;
+		// overflow-x: auto;
+		// overflow-y: hidden;
+		// -webkit-overflow-scrolling: touch;
+		white-space: nowrap;
+		// -ms-overflow-style: -ms-autohiding-scrollbar;
+	}
+	/* #genre-left,
+	#genre-right {
+		position: absolute;
+		z-index: 2;
+		top: 0;
+		height: 100%;
+		width: 30px;
+		line-height: 40px;
+		font-size: 30px;
+		padding: 0 10px;
+		cursor: pointer;
+	}
+	#genre-left {
+		left: 15px;
+		text-align: left;
+	}
+	#genre-right {
+		right: 15px;
+		text-align: right;
+	}*/
+}
+</style>
