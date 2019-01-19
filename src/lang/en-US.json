@@ -1,0 +1,15 @@
+{
+    "common": {
+        "login": "Login",
+        "search_placeholder": "Search Movie?"
+    },
+    "login": {
+        "email_address": "E-mail",
+        "password": "Password",
+        "login_btn": "Login",
+        "we_ll_never_share_your_email_with_anyone": "We'll never share your email with anyone else."
+    },
+    "home": {
+        "now_playing": "Now Playing"
+    }
+}

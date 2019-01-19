@@ -22,28 +22,28 @@
                             <button v-for="lang in langList" :key="lang.key" class="dropdown-item" type="button" :class="{ disabled: lang.key === checkedLang }" @click.prevent="setLangAction(lang.key)">{{ lang.text }}</button>
                         </div>
                     </div>
-                    <a href="#" class="btn btn-link" @click.stop.prevent="openLogin">Login</a>
+                    <a href="#" class="btn btn-link" @click.stop.prevent="openLogin">{{ $t('common.login') }}</a>
                 </div>
             </div>
         </nav>
         <!-- Modal -->
         <modal ref="login-modal" append-class="login-modal">
             <div slot="body">
-                <h2>Login</h2>
+                <h2>{{ $t('common.login') }}</h2>
             </div>
             <div slot="body">
                 <div class="modal-body">
                     <form class="text-left">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
+                            <label for="exampleInputEmail1">{{ $t('login.email_address') }}</label>
                             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            <small id="emailHelp" class="form-text text-muted">{{ $t('login.we_ll_never_share_your_email_with_anyone') }}</small>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
+                            <label for="exampleInputPassword1">{{ $t('login.password') }}</label>
                             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                         </div>
-                        <button type="submit" class="btn btn-warning btn-block">Submit</button>
+                        <button type="submit" class="btn btn-warning btn-block">{{ $t('login.login_btn') }}</button>
                     </form>
                 </div>
             </div>

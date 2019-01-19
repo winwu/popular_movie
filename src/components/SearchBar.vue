@@ -6,7 +6,7 @@
 				@keydown.down.prevent="keyDown"
 				@keydown.up.prevent="keyUp"
 				@keydown.enter.prevent="hit"
-				type="text" placeholder="search" autocomplete="off">
+				type="text" :placeholder="$t('common.search_placeholder')" autocomplete="off">
         </form>
 		<div v-if="results$" class="search-result">
 			<div v-for="(item, idx) in results$" :key="item.id"

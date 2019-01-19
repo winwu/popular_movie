@@ -1,5 +1,3 @@
-import { defaultIfEmpty } from "rxjs-compat/operator/defaultIfEmpty";
-
 // initial state
 const state = {
     langList: [
@@ -36,13 +34,13 @@ const actions = {
         }
     },
     setLangAction ({ commit }, newLang) {
-        window.localStorage.setItem('lang', newLang);
         commit('setLang', newLang);
     }
 }
 
 const mutations = {
     setLang (state, newLang) {
+        window.localStorage.setItem('lang', newLang);
         state.checkedLang = newLang;
     }
 }

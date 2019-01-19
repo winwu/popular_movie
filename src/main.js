@@ -7,6 +7,7 @@ import Paginate from 'vuejs-paginate'
 import Rx from 'rxjs/Rx'
 import VueRx from 'vue-rx'
 import Vue from 'vue'
+import i18n from './lang/i18n.setup.js'
 import router from './router'
 import store from './store'
 import App from './App.vue'
@@ -32,11 +33,9 @@ Vue.use(VueRx, Rx)
 // register pagination globally.
 Vue.component('paginate', Paginate)
 
-
-
-new Vue({
+export const app = new Vue({
   router,
   store,
+  i18n,
   render: h => h(App)
 }).$mount('#app')
-

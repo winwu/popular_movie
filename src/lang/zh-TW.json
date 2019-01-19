@@ -1,0 +1,15 @@
+{
+    "common": {
+        "login": "登入",
+        "search_placeholder": "找電影?"
+    },
+    "login": {
+        "email_address": "電子信箱",
+        "password": "密碼",
+        "login_btn": "登入",
+        "we_ll_never_share_your_email_with_anyone": "我們不會把你的電子信箱分享給任何人"
+    },
+    "home": {
+        "now_playing": "現正播放"
+    }
+}

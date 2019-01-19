@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="container">
-			<div class="display-3 mb-4">Now Playing</div>
+			<div class="display-3 mb-4">{{ $t('home.now_playing') }}</div>
 		</div>
 		<div class="home-slides mb-5">
 			<slick
@@ -115,7 +115,7 @@ export default {
 		height: 100%;
 		left: 0;
 		top: 0;
-		background: linear-gradient(to right, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 70%,rgba(0,0,0,1) 100%);
+		background: linear-gradient(to right, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 70%,rgba(0,0,0,1) 100%);
 	}
 	// .slick-slide {}
 	.slick-arrow {
@@ -175,7 +175,9 @@ export default {
 		background-color: #333;
 		z-index: -1;
 	}
-	// .movie-rd {}
+	.movie-rd {
+		font-size: 12px;
+	}
 	.movie-ov {
 		height: 40px;
 		overflow: hidden;
