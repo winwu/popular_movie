@@ -22,9 +22,10 @@
 								<img :data-lazy="$conf.IMAGE_BASE_URL + 'w780' + movie.backdrop_path">
 							</div>
 							<div class="movie-btm">
+								<i class="movie-average-vote">{{ movie.vote_average }}</i>
 								<h2>{{ movie.title }}</h2>
 								<div class="movie-rd">{{ movie.release_date }}</div>
-								<div class="movie-ov">{{ movie.overview }}</div>
+								<div class="movie-ov" v-if="movie.overview">{{ movie.overview }}</div>
 							</div>
 						</router-link>
 					</div>
@@ -199,6 +200,19 @@ export default {
 		height: auto;
 		padding: 15px 20px;
 		background: rgb(0, 0, 0);
+		.movie-average-vote {
+			position: absolute;
+			right: 20px;
+			border-radius: 40px;
+			width: 40px;
+			height: 40px;
+			top: -15px;
+			background: #000;
+			line-height: 40px;
+			text-align: center;
+			font-style: initial;
+			color: #ffc107;
+		}
 	}
 }
 </style>
