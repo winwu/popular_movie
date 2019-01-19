@@ -10,9 +10,11 @@ export default {
     props: {
         data: {
             type: Object,
-            default: {
-                name: '',
-                id: ''
+            default: function() {
+                return {
+                    name: '',
+                    id: ''
+                }
             }
         }
     },

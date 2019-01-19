@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { CONFIG as config } from './config.js'
 import Axios from 'axios'
 import Paginate from 'vuejs-paginate'
+import Notifications from 'vue-notification'
 import Rx from 'rxjs/Rx'
 import VueRx from 'vue-rx'
 import Vue from 'vue'
@@ -30,6 +31,7 @@ Axios.defaults.params['language'] = store.state.preference.checkedLang;
 Vue.prototype.$http = Axios;
 
 Vue.use(VueRx, Rx)
+Vue.use(Notifications)
 
 // register pagination globally.
 Vue.component('paginate', Paginate)

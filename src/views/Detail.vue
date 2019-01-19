@@ -163,7 +163,10 @@ export default {
         },
         setBookmark() {
             if (this.isLogin) {
-                alert('added to favirote')
+                this.$notify({
+                    title: 'Great!',
+                    text: 'Added to favorite'
+                })
             } else {
                 this.$eventBus.$emit('open-login');
             }

@@ -19,6 +19,7 @@
 				</div>
 			</div>
 		</footer>
+		<notifications position="top center"/>
   	</div>
 </template>
 
@@ -78,6 +79,29 @@ main {
 	a {
 		color: #eee;
 		font-size: 12px;
+	}
+}
+.notifications {
+	top: 70px!important;
+}
+.vue-notification {
+	padding: 10px;
+	margin: 0 5px 5px;
+	font-size: 12px;
+	color: #fff;
+	background: #272727;
+	border-left: 5px solid #111111;
+	&.warn {
+		background: #ffb648;
+		border-left-color: #f48a06;
+	}
+	&.error {
+		background: #E54D42;
+		border-left-color: #B82E24;
+	}
+	&.success {
+		background: #68CD86;
+		border-left-color: #42A85F;
 	}
 }
 </style>

@@ -108,11 +108,19 @@ export default {
 				this.$store.dispatch('auth/login', user)
 				this.isAjaxing = false;
 				this.$eventBus.$emit('close-login');
+				this.$notify({
+					type: 'success',
+                    text: 'Welcome back!'
+                })
 			})
 		},
 		logout() {
 			loginApi.mockLogout(()=> {
-				this.$store.dispatch('auth/logout')
+				this.$store.dispatch('auth/logout');
+				this.$notify({
+					type: 'success',
+                    text: 'Logout success!'
+                })
 			});
 		}
 	}
