@@ -1,3 +1,5 @@
+import { defaultIfEmpty } from "rxjs-compat/operator/defaultIfEmpty";
+
 // initial state
 const state = {
     langList: [
@@ -21,9 +23,20 @@ const getters = {
 
 const actions = {
     getInitLangAction ({ commit }) {
-        commit('setLang', 'zh-TW');
+        if (window.localStorage && window.localStorage.getItem('lang')) {
+            commit('setLang', window.localStorage.getItem('lang'));
+        } else {
+            switch (navigator.language ) {
+                case 'zh-TW':
+                    commit('setLang', 'zh-TW');
+                    break;
+                default:
+                    commit('setLang', 'en-US');
+            }
+        }
     },
     setLangAction ({ commit }, newLang) {
+        window.localStorage.setItem('lang', newLang);
         commit('setLang', newLang);
     }
 }
