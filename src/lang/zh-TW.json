@@ -1,6 +1,8 @@
 {
     "common": {
+        "hello": "嗨! {name}",
         "login": "登入",
+        "logout": "登出",
         "search_placeholder": "找電影?"
     },
     "login": {
@@ -10,6 +12,6 @@
         "we_ll_never_share_your_email_with_anyone": "我們不會把你的電子信箱分享給任何人"
     },
     "home": {
-        "now_playing": "現正播放"
+        "now_playing": "現正上映"
     }
 }

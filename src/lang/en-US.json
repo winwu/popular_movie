@@ -1,6 +1,8 @@
 {
     "common": {
+        "hello": "Hi! { name }",
         "login": "Login",
+        "logout": "Logout",
         "search_placeholder": "Search Movie?"
     },
     "login": {

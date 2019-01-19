@@ -48,6 +48,14 @@ export default {
 			}
 		}
 	},
+	mounted() {
+		this.$eventBus.$on('open-login', () => {
+			this.open();
+		});
+		this.$eventBus.$on('close-login', () => {
+			this.close();
+		});
+	},
 	methods: {
 		open() {
 			this.active = true;

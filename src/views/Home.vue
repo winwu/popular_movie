@@ -65,7 +65,6 @@ export default {
 		}
 	},
 	mounted() {
-		console.log('2');
 		this.fetchPopular();
 	},
 	methods: {

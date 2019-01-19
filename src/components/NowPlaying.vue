@@ -121,9 +121,9 @@ export default {
 	.slick-arrow {
 		position: absolute;
 		z-index: 1;
-		top: 50%;
-		height: 30px;
-		margin-top: -15px;
+		top: 100%;
+		height: 100%;
+		top: 0;
 		background: transparent;
 		border: none;
 		color: #fff;

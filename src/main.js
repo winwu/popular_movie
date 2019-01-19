@@ -20,6 +20,7 @@ Object.defineProperty(Vue.prototype, '$conf', { value: config });
 
 // set default language
 store.dispatch('preference/getInitLangAction')
+store.dispatch('auth/checkLogin')
 
 // set default param
 Axios.defaults.params = {}
