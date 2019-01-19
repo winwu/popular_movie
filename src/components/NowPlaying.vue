@@ -56,7 +56,7 @@ export default {
 					{
 						breakpoint: 1280,
 						settings: {
-							arrows: false,
+							// arrows: false,
 							centerMode: true,
 							centerPadding: '0px',
 							slidesToShow: 1
