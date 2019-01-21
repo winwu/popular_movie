@@ -57,20 +57,26 @@ export default new Router({
 	base: process.env.BASE_URL,
 	linkActiveClass: 'active',
 	scrollBehavior,
-  	routes: [
-    	{
+	routes: [
+		{
 			path: '/',
 			name: 'home',
 			component: Home,
 			meta: { scrollToTop: true }
-    	},
-    	{
-      		path: '/about',
-      		name: 'about',
-      		component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    	},
-    	{
-      		path: '/movie/detail/:movieId/:currentTab?',
+		},
+		{
+			path: '/discover',
+			name: 'discover',
+			component: () => import(/* webpackChunkName: "discover" */ './views/Discover/Discover.vue'),
+			meta: { scrollToTop: true }
+		},
+		{
+			path: '/about',
+			name: 'about',
+			component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+		},
+		{
+			path: '/movie/detail/:movieId/:currentTab?',
 			name: 'movie_detail',
 			component: () => import(/* webpackChunkName: "detail" */ './views/Detail.vue')
 		}

@@ -145,6 +145,7 @@ export default {
 		width: 320px;
 		color: #fff;
 		outline: none;
+		height: 40px;
 	}
 	.search-result {
 		position: absolute;

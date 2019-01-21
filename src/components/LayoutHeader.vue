@@ -8,8 +8,9 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto">
-						<!-- <router-link tag="li" active-class="active" to="/" class="nav-item" exact><a class="nav-link">Home</a></router-link>
-						<router-link tag="li" active-class="active" to="/about" class="nav-item"><a class="nav-link">About</a></router-link> -->
+						<router-link tag="li" active-class="active" :to="{ name: 'discover' }" class="nav-item mr-md-3">
+							<a class="nav-link">{{ $t('common.discover') }}</a>
+						</router-link>
 						<li>
 							<search-bar></search-bar>
 						</li>
@@ -53,7 +54,6 @@
 								<input v-model="auth.password" type="password" class="form-control" id="inputPassword" placeholder="Password">
 							</div>
 						</template>
-
 						<button type="submit" class="btn btn-warning btn-block" :disabled="isAjaxing === true">{{ $t('login.login_btn') }}</button>
 					</form>
 				</div>
@@ -182,9 +182,9 @@ export default {
 @keyframes sk-rotateplane {
 	0% {
 		transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-  	} 50% {
+	} 50% {
 		transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
-  	} 100% {
+	} 100% {
 		transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
   	}
 }

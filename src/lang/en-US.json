@@ -4,7 +4,8 @@
         "login": "Login",
         "logout": "Logout",
         "search_placeholder": "Search Movie?",
-        "genre": "Genre"
+        "genre": "Genre",
+        "discover": "Discover"
     },
     "login": {
         "email_address": "E-mail",
