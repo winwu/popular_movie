@@ -45,7 +45,8 @@ export default {
         }
     },
     mounted() {
-        this.selected = this.selectedValue;
+        let item = this.lists.find(x => x.key === this.selectedValue);
+        this.selected = item.value;
     },
     methods: {
         toggleOpen() {
@@ -64,7 +65,7 @@ export default {
         setActive(item) {
             this.close();
             if (typeof item === 'object' && item !== null) {
-                this.$emit('update:selectedValue', item.value)
+                this.$emit('update:selectedValue', item.key)
                 this.selected = item.value;
             } else {
                 this.$emit('update:selectedValue', item)
