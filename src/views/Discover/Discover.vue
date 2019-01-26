@@ -50,7 +50,7 @@ export default {
         return {
             isLoading: false,
             results: [],
-			currentPage: 1,
+            currentPage: 1,
             totalResults: null,
             totalPages: null,
             listYear: [
@@ -113,14 +113,14 @@ export default {
             this.totalResults = null;
             this.totalPages = null;
             this.resultes = [];
-		},
+        },
         fetchPage() {
             this.isLoading = true;
             this.$http
-				.get(`${ this.$conf.API_DOMAIN }discover/movie?page=${ this.currentPage }&sort_by=${ this.sortSelected }&year=${ this.yearSelected }`)
-				.then(res => {
-					console.log('res', res);
-					if (res.data && res.data.results) {
+                .get(`${ this.$conf.API_DOMAIN }discover/movie?page=${ this.currentPage }&sort_by=${ this.sortSelected }&year=${ this.yearSelected }`)
+                .then(res => {
+                    console.log('res', res);
+                    if (res.data && res.data.results) {
                         this.results = res.data.results;
                         this.totalResults = res.data.total_results;
                         this.totalPages = res.data.total_pages;
@@ -131,16 +131,16 @@ export default {
                 })
         },
         renewFetch(page) {
-			this.currentPage = page;
-			this.$router.push({
-				name: this.$router.name,
-				query: {
-					page: this.currentPage,
-					year: this.yearSelected,
-					sort: this.sortSelected
-				}
-			});
-		},
+            this.currentPage = page;
+            this.$router.push({
+                name: this.$router.name,
+                query: {
+                    page: this.currentPage,
+                    year: this.yearSelected,
+                    sort: this.sortSelected
+                }
+            });
+        },
     },
     watch: {
         yearSelected() {
@@ -153,21 +153,21 @@ export default {
         }
     },
     beforeRouteEnter(to, from, next) {
-		let page = to.query.page ? +to.query.page : 1;
-		let year = to.query.year ? to.query.year : (new Date()).getFullYear();
-		let sort = to.query.sort ? to.query.sort : 'popularity.desc';
-		next((vm => {
-			vm.initData(page, year, sort);
-			vm.fetchPage();
-		}))
-	},
-	beforeRouteUpdate (to, from, next) {
-		let page = to.query.page ? +to.query.page : 1;
-		let year = to.query.year ? to.query.year : this.yearSelected;
-		let sort = to.query.sort ? to.query.sort : this.sortSelected;
-		this.initData(page, year, sort);
-		this.fetchPage();
-		next()
-	}
+        let page = to.query.page ? +to.query.page : 1;
+        let year = to.query.year ? to.query.year : (new Date()).getFullYear();
+        let sort = to.query.sort ? to.query.sort : 'popularity.desc';
+        next((vm => {
+            vm.initData(page, year, sort);
+            vm.fetchPage();
+        }))
+    },
+    beforeRouteUpdate (to, from, next) {
+        let page = to.query.page ? +to.query.page : 1;
+        let year = to.query.year ? to.query.year : this.yearSelected;
+        let sort = to.query.sort ? to.query.sort : this.sortSelected;
+        this.initData(page, year, sort);
+        this.fetchPage();
+        next()
+    }
 }
 </script>
