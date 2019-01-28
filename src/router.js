@@ -10,34 +10,11 @@ Vue.use(Router)
 // - defaults to no scroll behavior
 // - return false to prevent scroll
 const scrollBehavior = function (to, from, savedPosition) {
-	if (savedPosition) {
-		// savedPosition is only available for popstate navigations.
-		return savedPosition
-	} else {
-		// scroll to anchor by returning the selector
-		if (to.hash) {
-			const position = {}
-			position.selector = to.hash
-
-			// specify offset of the element
-			if (to.hash === '#header') {
-				position.offset = { y: 100 }
-			}
-
-			if (document.querySelector(to.hash)) {
-				return position
-			}
-
-			// if the returned position is falsy or an empty object,
-			// will retain current scroll position.
-			return false
-		}
-		return new Promise((resolve, reject) => {
-			setTimeout(() => {
-				resolve({ x: 0, y: 0 })
-			}, 500)
-		})
-	}
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			resolve({ x: 0, y: 0 })
+		}, 300)
+	})
 }
 export default new Router({
 	mode: 'history',

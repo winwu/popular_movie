@@ -22,21 +22,40 @@
         </form>
 
         <div v-if="results.length" class="row">
-            <div v-for="item in results" :key="item.id" class="col-12 col-md-6">
-                <router-link class="discover-card" :to="{ name: 'movie_detail', params: { movieId: item.id } }">
-                    <button class="star-btn" @click.stop.prevent="setBookmark"><i class="fas fa-heart"></i></button>
-                    <div class="discover-card-left">
-                        <div v-if="item.poster_path" class="poster" :style="{ backgroundImage: 'url(' + $conf.IMAGE_BASE_URL + 'w342/' + item.poster_path + ')' }"></div>
-                        <div v-else class="poster poster-empty"></div>
-                    </div>
-                    <div class="discover-card-right">
-                        <div class="title">{{ item.title }}</div>
-                        <div class="ov">{{ item.overview }}</div>
-                        <div class="release">上映日期: {{ item.release_date }}</div>
-                        <div class="average-vote">{{ item.vote_average }}</div>
-                    </div>
-                </router-link>
-            </div>
+            <template v-if="isLoading === true">
+                <div v-for="n in 6" :key="n" class="col-12 col-md-6">
+                    <content-loader
+                        :height="300"
+                        :width="690"
+                        :speed="2"
+                        primaryColor="#333"
+                        secondaryColor="#666">
+                        <rect x="230.5" y="21.63" rx="3" ry="3" width="241.3" height="31.693199999999997" />
+                        <circle cx="172.2938280534213" cy="401.5938280534213" r="47.793828053421294" />
+                        <rect x="24.5" y="21.8" rx="0" ry="0" width="180" height="257" />
+                        <rect x="230.5" y="72.8" rx="0" ry="0" width="400" height="16" />
+                        <rect x="229.5" y="97.8" rx="0" ry="0" width="380" height="16" />
+                    </content-loader>
+                </div>
+            </template>
+            <template v-else>
+                <div v-for="item in results" :key="item.id" class="col-12 col-md-6">
+                    <router-link class="discover-card" :to="{ name: 'movie_detail', params: { movieId: item.id } }">
+                        <button class="star-btn" @click.stop.prevent="setBookmark"><i class="fas fa-heart"></i></button>
+                        <div class="discover-card-left">
+                            <div v-if="item.poster_path" class="poster" :style="{ backgroundImage: 'url(' + $conf.IMAGE_BASE_URL + 'w342/' + item.poster_path + ')' }"></div>
+                            <div v-else class="poster poster-empty"></div>
+                        </div>
+                        <div class="discover-card-right">
+                            <div class="title">{{ item.title }}</div>
+                            <div class="release">上映日期: {{ item.release_date }}</div>
+                            <div class="ov">{{ item.overview }}</div>
+                            <div class="average-vote">{{ item.vote_average }}</div>
+                        </div>
+                    </router-link>
+                </div>
+            </template>
+
             <div v-if="currentPage && totalPages > 1" class="mt-4 mb-4">
                 <paginate
                     v-model="currentPage"
@@ -60,6 +79,7 @@
 </template>
 
 <script>
+import { ContentLoader } from 'vue-content-loader'
 import CustomDropdown from './CustomDropdown'
 export default {
     name: 'discover',
@@ -119,6 +139,7 @@ export default {
         }
     },
     components: {
+        ContentLoader,
         CustomDropdown
     },
     methods: {
@@ -251,6 +272,7 @@ export default {
         .title {
             font-size: 24px;
             margin-bottom: 20px;
+            padding-right: 46px;
         }
         .ov {
             height: 66px;

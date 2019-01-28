@@ -45,10 +45,10 @@
 
 				<div v-if="totalPages > 1" class="mt-4 mb-4">
 					<paginate
+						v-model="page"
 						:pageCount="totalPages"
 						:pageRange="6"
 						:marginPages="2"
-						:initialPage="(page-1)"
 						:clickHandler="changePage"
 						:containerClass="'pagination pagination-sm'"
 						:page-class="'page-item'"
