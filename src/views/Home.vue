@@ -23,6 +23,18 @@
 			</div>
 		</section>
 		<div class="container">
+			<div class="row">
+				<div class="col-12 col-md-6">
+					<router-link class="type-card" :to="{ name: 'popular' }" :style="{ backgroundImage: 'url(' + 'https://source.unsplash.com/400x225/?movie,nature,popular' + ')' }">
+						<div class="type-card-title">/Popular</div>
+					</router-link>
+				</div>
+				<div class="col-12 col-md-6">
+					<router-link class="type-card" :to="{ name: 'upcoming' }" :style="{ backgroundImage: 'url(' + 'https://source.unsplash.com/400x225/?movie,nature' + ')' }">
+						<div class="type-card-title">/Upcoming</div>
+					</router-link>
+				</div>
+			</div>
 			<div v-if="populars" class="row no-gutters">
 				<template v-if="loaded.populars === true">
 					<div v-for="n in 8" :key="n" class="col-12 col-md-6 col-lg-3">
@@ -185,5 +197,39 @@ export default {
 		right: 15px;
 		text-align: right;
 	}*/
+}
+.type-card {
+	display: block;
+	padding: 15px;
+	border-radius: 5px;
+	min-height: 240px;
+	background: #333;
+	margin: 15px auto;
+	color: #fff;
+	text-decoration: none;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-position: center center;
+	position: relative;
+	&:before {
+		content: ' ';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		background: rgba(0, 0, 0, 0.6);
+		transition: background .33s ease;
+	}
+	&:hover {
+		&:before {
+			background: rgba(0, 0, 0, 0.45);
+		}
+	}
+	.type-card-title {
+		font-size: 40px;
+		position: relative;
+		z-index: 1;
+	}
 }
 </style>
