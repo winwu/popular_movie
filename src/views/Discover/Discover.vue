@@ -21,23 +21,40 @@
             </div>
         </form>
 
-        <div v-if="totalPages > 1" class="mt-4 mb-4">
-            <paginate
-                :pageCount="totalPages"
-                :pageRange="6"
-                :marginPages="2"
-                :initialPage="(currentPage-1)"
-                :clickHandler="renewFetch"
-                :containerClass="'pagination pagination-sm'"
-                :page-class="'page-item'"
-                :active-class="'page-item active'"
-                :page-link-class="'page-link'"
-                :prev-class="'page-item prev'"
-                :prev-link-class="'page-link'"
-                :next-class="'page-item next'"
-                :next-link-class="'page-link'"
-                :pageClass="''">
-            </paginate>
+        <div v-if="results.length" class="row">
+            <div v-for="item in results" :key="item.id" class="col-12 col-md-6">
+                <router-link class="discover-card" :to="{ name: 'movie_detail', params: { movieId: item.id } }">
+                    <button class="star-btn" @click.stop.prevent="setBookmark"><i class="fas fa-heart"></i></button>
+                    <div class="discover-card-left">
+                        <div v-if="item.poster_path" class="poster" :style="{ backgroundImage: 'url(' + $conf.IMAGE_BASE_URL + 'w342/' + item.poster_path + ')' }"></div>
+                        <div v-else class="poster poster-empty"></div>
+                    </div>
+                    <div class="discover-card-right">
+                        <div class="title">{{ item.title }}</div>
+                        <div class="ov">{{ item.overview }}</div>
+                        <div class="release">上映日期: {{ item.release_date }}</div>
+                        <div class="average-vote">{{ item.vote_average }}</div>
+                    </div>
+                </router-link>
+            </div>
+            <div v-if="currentPage && totalPages > 1" class="mt-4 mb-4">
+                <paginate
+                    v-model="currentPage"
+                    :pageCount="totalPages"
+                    :pageRange="6"
+                    :marginPages="2"
+                    :clickHandler="renewFetch"
+                    :containerClass="'pagination pagination-sm'"
+                    :page-class="'page-item'"
+                    :active-class="'page-item active'"
+                    :page-link-class="'page-link'"
+                    :prev-class="'page-item prev'"
+                    :prev-link-class="'page-link'"
+                    :next-class="'page-item next'"
+                    :next-link-class="'page-link'"
+                    :pageClass="''">
+                </paginate>
+            </div>
         </div>
     </div>
 </template>
@@ -50,7 +67,7 @@ export default {
         return {
             isLoading: false,
             results: [],
-            currentPage: 1,
+            currentPage: null,
             totalResults: null,
             totalPages: null,
             listYear: [
@@ -105,7 +122,7 @@ export default {
         CustomDropdown
     },
     methods: {
-        initData(currentP, year, sort) {
+        async initData(currentP, year, sort) {
             // this.yearSelected = year;
             // this.sortSelected = sort;
 
@@ -113,13 +130,13 @@ export default {
             this.totalResults = null;
             this.totalPages = null;
             this.resultes = [];
+            this.fetchPage();
         },
         fetchPage() {
             this.isLoading = true;
             this.$http
                 .get(`${ this.$conf.API_DOMAIN }discover/movie?page=${ this.currentPage }&sort_by=${ this.sortSelected }&year=${ this.yearSelected }`)
                 .then(res => {
-                    console.log('res', res);
                     if (res.data && res.data.results) {
                         this.results = res.data.results;
                         this.totalResults = res.data.total_results;
@@ -141,6 +158,16 @@ export default {
                 }
             });
         },
+        setBookmark() {
+            if (this.isLogin) {
+                this.$notify({
+                    title: 'Great!',
+                    text: 'Added to favorite'
+                })
+            } else {
+                this.$eventBus.$emit('open-login');
+            }
+        }
     },
     watch: {
         yearSelected() {
@@ -156,18 +183,79 @@ export default {
         let page = to.query.page ? +to.query.page : 1;
         let year = to.query.year ? to.query.year : (new Date()).getFullYear();
         let sort = to.query.sort ? to.query.sort : 'popularity.desc';
-        next((vm => {
-            vm.initData(page, year, sort);
-            vm.fetchPage();
+        next((async vm => {
+            await vm.initData(page, year, sort);
         }))
     },
-    beforeRouteUpdate (to, from, next) {
+    async beforeRouteUpdate (to, from, next) {
         let page = to.query.page ? +to.query.page : 1;
         let year = to.query.year ? to.query.year : this.yearSelected;
         let sort = to.query.sort ? to.query.sort : this.sortSelected;
-        this.initData(page, year, sort);
-        this.fetchPage();
+        await this.initData(page, year, sort);
         next()
     }
 }
 </script>
+
+<style lang="scss" scoped>
+.discover-card {
+    position: relative;
+    min-height: 300px;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    margin: 15px auto;
+    background: rgba(4, 4, 4, 0.7);
+    border-radius: 5px;
+    overflow: hidden;
+    &:hover {
+        .title {
+            color: #FFC107;
+        }
+    }
+    .star-btn {
+        position: absolute;
+        right: 20px;
+        top: 0px;
+        border: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 0 0 3px 3px;
+        background: #FFC107;
+        z-index: 2;
+        cursor: pointer;
+    }
+    .discover-card-left {
+        position: absolute;
+        width: 200px;
+        top: 0;
+        height: 100%;
+        .poster {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+            &.poster-empty {
+                background-color: #333;
+            }
+        }
+    }
+    .discover-card-right {
+        margin-left: 200px;
+        padding: 15px;
+        font-size: 14px;
+        .title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .ov {
+            height: 66px;
+            overflow: hidden;
+        }
+    }
+}
+</style>
