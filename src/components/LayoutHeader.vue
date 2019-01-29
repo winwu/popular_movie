@@ -24,6 +24,7 @@
 						</div>
 					</div>
 					<template v-if="isLogin && loginUser">
+						<notification></notification>
 						<div>{{ $t('common.hello', { name: loginUser.name }) }} <a href="#" @click.stop.prevent="logout">{{ $t('common.logout') }}</a></div>
 					</template>
 					<template v-else>
@@ -67,11 +68,13 @@ import loginApi from '../api/login'
 import { mapGetters, mapState, mapActions  } from 'vuex'
 import SearchBar from '@/components/SearchBar'
 import Modal from '@/components/Modal'
+import Notification from '@/components/Notification'
 export default {
 	name: 'layout-header',
 	components: {
 		SearchBar,
-		Modal
+		Modal,
+		Notification
 	},
 	data() {
 		return {
