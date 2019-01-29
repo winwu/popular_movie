@@ -5,7 +5,10 @@
         "logout": "Logout",
         "search_placeholder": "Search Movie?",
         "genre": "Genre",
-        "discover": "Discover"
+        "discover": "Discover",
+        "release_date": "Release Date",
+        "upcoming": "Upcoming",
+        "popular": "Popular"
     },
     "login": {
         "email_address": "E-mail",

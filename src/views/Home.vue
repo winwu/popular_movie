@@ -1,5 +1,5 @@
 <template>
-  	<div id="home">
+    <div id="home">
 		<now-playing></now-playing>
 		<section id="genre-sec">
 			<div class="container mt-3">
@@ -26,12 +26,12 @@
 			<div class="row">
 				<div class="col-12 col-md-6">
 					<router-link class="type-card" :to="{ name: 'popular' }" :style="{ backgroundImage: 'url(' + 'https://source.unsplash.com/400x225/?movie,nature,popular' + ')' }">
-						<div class="type-card-title">/Popular</div>
+						<div class="type-card-title">/{{ $t('common.popular') }}</div>
 					</router-link>
 				</div>
 				<div class="col-12 col-md-6">
 					<router-link class="type-card" :to="{ name: 'upcoming' }" :style="{ backgroundImage: 'url(' + 'https://source.unsplash.com/400x225/?movie,nature' + ')' }">
-						<div class="type-card-title">/Upcoming</div>
+						<div class="type-card-title">/{{ $t('common.upcoming') }}</div>
 					</router-link>
 				</div>
 			</div>
@@ -74,8 +74,8 @@
 					</paginate>
 				</div>
 			</div>
-		</div>
-  	</div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -113,7 +113,11 @@ export default {
 			this.populars = [];
 
 			this.$http
-				.get(`${ this.$conf.API_DOMAIN }movie/popular?page=${ this.page }`)
+				.get(`${ this.$conf.API_DOMAIN }movie/popular`, {
+                    params: {
+                        page: this.page
+                    }
+                })
 				.then(res => {
 					console.log('res', res);
 					if (res.data && res.data.results) {
@@ -227,6 +231,7 @@ export default {
 		}
 	}
 	.type-card-title {
+        font-weight: lighter;
 		font-size: 40px;
 		position: relative;
 		z-index: 1;

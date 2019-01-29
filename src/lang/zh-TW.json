@@ -5,7 +5,10 @@
         "logout": "登出",
         "search_placeholder": "找電影?",
         "genre": "類型",
-        "discover": "探索"
+        "discover": "探索",
+        "release_date": "上映日期",
+        "upcoming": "即將上映",
+        "popular": "熱門電影"
     },
     "login": {
         "email_address": "電子信箱",

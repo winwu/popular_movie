@@ -48,9 +48,9 @@
                         </div>
                         <div class="discover-card-right">
                             <div class="title">{{ item.title }}</div>
-                            <div class="release">上映日期: {{ item.release_date }}</div>
+                            <div class="release">{{ $t('common.release_date') }}: {{ item.release_date }}</div>
                             <div class="ov">{{ item.overview }}</div>
-                            <div class="average-vote">{{ item.vote_average }}</div>
+                            <div v-if="item.vote_count" class="average-vote">{{ item.vote_average }}</div>
                         </div>
                     </router-link>
                 </div>
@@ -156,7 +156,13 @@ export default {
         fetchPage() {
             this.isLoading = true;
             this.$http
-                .get(`${ this.$conf.API_DOMAIN }discover/movie?page=${ this.currentPage }&sort_by=${ this.sortSelected }&year=${ this.yearSelected }`)
+                .get(`${ this.$conf.API_DOMAIN }discover/movie`, {
+                    params: {
+                        page: this.currentPage,
+                        sort_by: this.sortSelected,
+                        year: this.yearSelected
+                    }
+                })
                 .then(res => {
                     if (res.data && res.data.results) {
                         this.results = res.data.results;

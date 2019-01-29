@@ -64,9 +64,14 @@ export default {
 				} else {
 					// 發 api
 					return Observable
-						.fromPromise(this.$http.get(`${ this.$conf.API_DOMAIN }search/movie?include_adult=false&query=${ keyword }&page=1`))
+						.fromPromise(this.$http.get(`${ this.$conf.API_DOMAIN }search/movie`, {
+							params: {
+								page: 1,
+								include_adult: false,
+								query: keyword
+							}
+						}))
 						.flatMap((res) => {
-							console.info('res', res);
 							if (+res.status === 200 && res.data && res.data.results.length > 0) {
 								this.dataLength = res.data.results.length;
 								this.inVueResults = res.data.results;
