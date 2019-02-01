@@ -4,7 +4,7 @@
             <i class="fas fa-bell"></i>
         </div>
         <div class="notification-list">
-            <div v-if="isActive" id="notification-list-cont">
+            <div id="notification-list-cont">
                 <h2 class="noti-title">Notification</h2>
                 <div>
                     <div v-for="item in datas" :key="item.id">{{ item.title }}</div>
@@ -16,7 +16,6 @@
 
 <script>
 import ClickOutside from 'vue-click-outside'
-import { Observable } from 'rxjs'
 export default {
     name: 'notification',
     directives: {
@@ -24,7 +23,7 @@ export default {
     },
     data() {
         return {
-            isActive: true,
+            isActive: false,
             currentPage: 1,
             datas: [],
             totalPages: null
@@ -71,6 +70,11 @@ export default {
             color: #FFC107;
         }
     }
+    &.active {
+        .notification-list {
+            display: block;
+        }
+    }
     .notification-icon {
         position: relative;
         padding: 4px 15px;
@@ -78,6 +82,7 @@ export default {
     }
 }
 .notification-list {
+    display: none;
     position: absolute;
     height: 200px;
     overflow: auto;

@@ -15,11 +15,11 @@
                             <search-bar></search-bar>
                         </li>
                     </ul>
-                    <div class="dropdown mr-2">
-                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownLangMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="dd-wrap mr-2" v-click-outside="closeLangDropdown">
+                        <button @click.prevent="toggleLangDropdown()" id="dropdownLangMenu">
                             {{ checkedLangObj.text }}
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownLangMenu">
+                        <div v-show="isOpenLangDropdown" class="dropdown-menu">
                             <button v-for="lang in langList" :key="lang.key" class="dropdown-item" type="button" :class="{ disabled: lang.key === checkedLang }" @click.prevent="setLangAction(lang.key)">{{ lang.text }}</button>
                         </div>
                     </div>
@@ -66,11 +66,15 @@
 <script>
 import loginApi from '../api/login'
 import { mapGetters, mapState, mapActions  } from 'vuex'
+import ClickOutside from 'vue-click-outside'
 import SearchBar from '@/components/SearchBar'
 import Modal from '@/components/Modal'
 import Notification from '@/components/Notification'
 export default {
     name: 'layout-header',
+    directives: {
+        ClickOutside
+    },
     components: {
         SearchBar,
         Modal,
@@ -78,6 +82,7 @@ export default {
     },
     data() {
         return {
+            isOpenLangDropdown: false,
             isAjaxing: false,
             auth: {
                 email: '',
@@ -125,6 +130,12 @@ export default {
                     text: 'Logout success!'
                 })
             });
+        },
+        toggleLangDropdown() {
+            this.isOpenLangDropdown = !this.isOpenLangDropdown;
+        },
+        closeLangDropdown() {
+            this.isOpenLangDropdown = false;
         }
     }
 }
@@ -150,14 +161,21 @@ export default {
     }
 }
 
-#dropdownLangMenu {
-    background: #000;
-    border: 1px solid #FFC107;
-    color: #FFC107;
-}
-.dropdown-menu {
-    width: 100%;
-    min-width: 120px;
+.dd-wrap {
+    position: relative;
+    #dropdownLangMenu {
+        background: #000;
+        border: 1px solid #FFC107;
+        color: #FFC107;
+        font-size: 12px;
+    }
+    .dropdown-menu {
+        width: 100%;
+        min-width: 120px;
+        display: block;
+        right: 0;
+        left: auto;
+    }
 }
 
 .loading-mask {
