@@ -23,8 +23,8 @@ import ClickOutside from 'vue-click-outside'
 export default {
     name: 'custom-dropdown',
     directives: {
-		ClickOutside
-	},
+        ClickOutside
+    },
     props: {
         labelTitle: {
             type: String,

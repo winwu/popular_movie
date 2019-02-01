@@ -99,8 +99,8 @@
 <script>
 import { mapState  } from 'vuex'
 export default {
-	name: 'movie-detail',
-	components: {
+    name: 'movie-detail',
+    components: {
         'async-detail-reviews': () => ({
             component: import(/* webpackChunkName: "detail_reviews" */'@/views/Detail/Reviews.vue'),
             loading:  { template: `<h1>Loading...</h1>` },
@@ -111,14 +111,14 @@ export default {
         'async-detail-credits': () => import(/* webpackChunkName: "detail_credits" */'@/views/Detail/Credits.vue'),
         'async-detail-videos': () => import(/* webpackChunkName: "detail_about" */'@/views/Detail/Videos.vue')
     },
-	data() {
+    data() {
         return {
             currentTab: null,
             movie: null,
             videos: []
         }
-	},
-	mounted() {
+    },
+    mounted() {
         if (this.$route.params.currentTab && this.$route.params.currentTab !== '') {
             this.currentTab = this.$route.params.currentTab;
         } else {
@@ -127,8 +127,8 @@ export default {
     },
     computed: {
         ...mapState({
-			isLogin: state => state.auth.isLogin
-		}),
+            isLogin: state => state.auth.isLogin
+        }),
         dynamicComponent() {
             if (this.currentTab === 'credits') {
                 return 'async-detail-credits';
@@ -139,7 +139,7 @@ export default {
             }
         }
     },
-	methods: {
+    methods: {
         async fetchAll(movieId) {
             if (movieId) {
                 this.fetchDetail(movieId);
@@ -150,7 +150,7 @@ export default {
         setCurrentTab(newTab) {
             this.currentTab = newTab;
         },
-		fetchDetail(movieId) {
+        fetchDetail(movieId) {
             if (movieId) {
                 this.$http
                     .get(`${ this.$conf.API_DOMAIN }movie/${ movieId }`)
@@ -188,11 +188,11 @@ export default {
         currentTab: function () {
             console.log('tab changes!', this.currentTab);
             this.$router.replace({
-				name: this.$router.name,
-				params: {
-					currentTab: this.currentTab
-				}
-			});
+                name: this.$router.name,
+                params: {
+                    currentTab: this.currentTab
+                }
+            });
         }
     },
     beforeRouteEnter(to, from, next) {

@@ -64,18 +64,18 @@ export default {
 
 <style lang="scss">
 #notification-wrap {
-	position: relative;
+    position: relative;
     &.active,
     &:hover {
         .notification-icon {
             color: #FFC107;
         }
     }
-	.notification-icon {
-		position: relative;
-		padding: 4px 15px;
+    .notification-icon {
+        position: relative;
+        padding: 4px 15px;
         cursor: pointer;
-	}
+    }
 }
 .notification-list {
     position: absolute;

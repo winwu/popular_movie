@@ -20,14 +20,14 @@ export default {
     },
     methods: {
         stringToHslColor(string, s, l) {
-			var hash = 0;
-			for (var i = 0; i < string.length; i++) {
-				hash += string.charCodeAt(i);
-			}
-			var h = hash % 360;
-			// return 'hsl('+h+', '+s+'%, '+l+'%)';
-			return `hsl(${ h }, ${ s }%, ${ l }%)`;
-		}
+            var hash = 0;
+            for (var i = 0; i < string.length; i++) {
+                hash += string.charCodeAt(i);
+            }
+            var h = hash % 360;
+            // return 'hsl('+h+', '+s+'%, '+l+'%)';
+            return `hsl(${ h }, ${ s }%, ${ l }%)`;
+        }
     }
 }
 </script>
