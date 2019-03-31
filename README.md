@@ -10,7 +10,6 @@
 ### 練習主要示範為:
 
 * Vuex 儲存全站需要知道狀態的資料，最基本的例如登入狀態、使用者的基本資訊，例如帳號。 (登入狀態僅作簡單的 DEMO)
-* Header 搜尋功能用 RxJS 示範，偵測 input 延遲並發送 API。 (現為 RxJS 嫩鳥，沒寫好請包涵 Orz)
 * 部分 API 在載入時有做 Loading 效果 (content loader)，增進使用體驗。
 * i18n 切換。
 * 分頁功能，以及 Discover 頁面在做分頁或 filter 時更新網址 Query 參數，搜尋結果可分享。
