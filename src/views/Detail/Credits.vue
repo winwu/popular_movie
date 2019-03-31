@@ -18,7 +18,7 @@
         <template v-else>
             <div class="row mt-4 mb-4">
                 <div v-for="cast in datas" :key="cast.id" class="col-12 col-md-4 col-lg-3">
-                    <div class="cast-card" :data-id="cast.id" v-stream:mouseover="{ subject: isHover$, data: cast.id }">
+                    <div class="cast-card" :data-id="cast.id">
                         <!-- <div class="cast-pic">
                             <img v-if="cast.profile_path" :src=" $conf.IMAGE_BASE_URL + 'w154' + cast.profile_path" :alt="cast.name">
                         </div> -->
@@ -35,7 +35,6 @@
 
 <script>
 import { ContentLoader } from 'vue-content-loader'
-import { Observable } from 'rxjs'
 export default {
     name: 'detail-credit',
     data() {
@@ -47,27 +46,6 @@ export default {
     components: {
         ContentLoader
     },
-    domStreams: ['isHover$'],
-    subscriptions() {
-        // @TODO, credit 的 API 好像有問題
-        const detailResult$ = this.isHover$
-                .debounceTime(1000)
-                .pluck('data')
-                .do( d => console.log(d))
-                .switchMap((castId) => {
-                    return Observable.fromPromise(this.$http.get(`${ this.$conf.API_DOMAIN }credit/${ castId }`))
-                        .flatMap((res) => {
-                            console.log('res', res);
-                            // this.dataLength = res.body.entry.results.length;
-                            return res.json();
-                        })
-                        .catch(() => Observable.of([]))
-                })
-                .share()
-        return {
-            detailResult$
-        }
-    },
     methods: {
         fetchCredits() {
             let movieId = this.$route.params.movieId;
@@ -75,7 +53,6 @@ export default {
                 // reset
                 this.loaded = true;
                 this.datas = [];
-
                 this.$http
                     .get(`${ this.$conf.API_DOMAIN }movie/${ movieId }/credits`, {
                         params: {

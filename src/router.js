@@ -20,7 +20,7 @@ export default new Router({
 	mode: 'history',
 	base: process.env.BASE_URL,
 	linkActiveClass: 'active',
-	scrollBehavior,
+	// scrollBehavior,
 	routes: [
 		{
 			path: '/',

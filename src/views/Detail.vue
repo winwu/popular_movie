@@ -109,7 +109,7 @@ export default {
             timeout: 6000
         }),
         'async-detail-credits': () => import(/* webpackChunkName: "detail_credits" */'@/views/Detail/Credits.vue'),
-        'async-detail-videos': () => import(/* webpackChunkName: "detail_about" */'@/views/Detail/Videos.vue')
+        'async-detail-videos': () => import(/* webpackChunkName: "detail_videos" */'@/views/Detail/Videos.vue')
     },
     data() {
         return {

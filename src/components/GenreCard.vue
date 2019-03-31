@@ -43,6 +43,7 @@ export default {
     min-width: 80px;
     height: 40px;
     cursor: pointer;
+    text-align: center;
 }
 </style>
 

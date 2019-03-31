@@ -25,12 +25,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-6">
-                    <router-link class="type-card" :to="{ name: 'popular' }" :style="{ backgroundImage: 'url(' + 'https://source.unsplash.com/400x225/?movie,nature,popular' + ')' }">
+                    <router-link class="type-card" :to="{ name: 'home' }" :style="{ backgroundImage: 'url(' + 'https://source.unsplash.com/400x225/?movie,nature,popular' + ')' }">
                         <div class="type-card-title">/{{ $t('common.popular') }}</div>
                     </router-link>
                 </div>
                 <div class="col-12 col-md-6">
-                    <router-link class="type-card" :to="{ name: 'upcoming' }" :style="{ backgroundImage: 'url(' + 'https://source.unsplash.com/400x225/?movie,nature' + ')' }">
+                    <router-link class="type-card" :to="{ name: 'home' }" :style="{ backgroundImage: 'url(' + 'https://source.unsplash.com/400x225/?movie,nature' + ')' }">
                         <div class="type-card-title">/{{ $t('common.upcoming') }}</div>
                     </router-link>
                 </div>
