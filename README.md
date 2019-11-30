@@ -1,42 +1,33 @@
 # Popular Movie
 
-### 串接 themoviedb 的 API 做一個簡單的 Vue Project，主要功能有:
+contain functions:
 
-* 首頁: 列出主要的熱門電影、電影分類列表、Popular 以及 Upcoming 電影的入口連結。
-* 電影內頁: 列出電影的主要資訊，下方 Tab 分別列出評論、演員資訊以及預告影片列表。
-* 搜尋功能: header 可以搜尋電影資訊。
-* Discover 頁面: 參考官方 Discover 頁面所做出來的頁面。
+* Home page: Lists the main popular movies, category listings, and popular and Upcoming movie entry links.
+* Detail Page: Lists the main information of the movie. The tabs below list the reviews, cast information, and trailer videos.
+* Search function: header can search movie information.
+* Discover page: Refer to the page made by the official Discover page.
 
-### 練習主要示範為:
-
-* Vuex 儲存全站需要知道狀態的資料，最基本的例如登入狀態、使用者的基本資訊，例如帳號。 (登入狀態僅作簡單的 DEMO)
-* 部分 API 在載入時有做 Loading 效果 (content loader)，增進使用體驗。
-* i18n 切換。
-* 分頁功能，以及 Discover 頁面在做分頁或 filter 時更新網址 Query 參數，搜尋結果可分享。
-
-
-### 需改進之處:
-* header search 功能補做可以透過鍵盤選擇上下搜尋結果，且 searchbar 裡面的卷軸要可以跟著移動。
-* 首頁電影分類卡片呈現方式可再調整。
+### Something need to improve:
+* The header searchbar can be supplemented by selecting up and down throught the keyboard, and the scroll bar in the search bar must be moved along with it.
 
 
 ## TODO
 
-* fetch detail by genre (https://api.themoviedb.org/3/discover/movie?api_key=###&with_genres=28).
+* fetch detail by genre (forexample: https://api.themoviedb.org/3/discover/movie?api_key=###&with_genres=XXXX).
 * fetch TV show.
-* personal profile page.
-* [inprogress] advance search with filter.
-* notification window and scroll to load more demo. (hope like pinterest)
+* implement personal profile page.
+* implement advance search with filter.
+
 
 ## Project setup
 
-1. 先執行 npm install 或 npm i 將此專案所需的相依套件下載
+1. please install packages from npm.
 
 ```
 npm install
 ```
 
-2. 將 `config.example.js` 複製為 `config.js`，並申請好 API_KEY 貼到 config.js。
+2. copy `config.example.js` as `config.js`，and apply for API_KEY for [themoviedb](https://developers.themoviedb.org/3/getting-started/introduction) and paste it into config.js.
 
 
 ### Compiles and hot-reloads for development
@@ -56,7 +47,7 @@ npm run build
 
 ## Notes
 
-從 api 取得的圖片可以從參數決定要拿哪些 size:
+we can get images by different sizes, such as:
 
 * "w92"
 * "w154"
