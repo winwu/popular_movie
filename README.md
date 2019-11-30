@@ -1,10 +1,6 @@
 # Popular Movie
 
 contain functions:
-
-![image](https://github.com/winwu/popular_movie/blob/master/demo_pic/demo.png)
-
-
 * Home page: Lists the main popular movies, category listings, and popular and Upcoming movie entry links.
 * Detail Page: Lists the main information of the movie. The tabs below list the reviews, cast information, and trailer videos.
 * Search function: header can search movie information.
