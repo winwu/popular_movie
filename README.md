@@ -13,7 +13,7 @@ contain functions:
 
 ## TODO
 
-* fetch detail by genre (forexample: https://api.themoviedb.org/3/discover/movie?api_key=###&with_genres=XXXX).
+* fetch detail for each genre.
 * fetch TV show.
 * implement personal profile page.
 * implement advance search with filter.
