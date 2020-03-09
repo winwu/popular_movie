@@ -56,3 +56,8 @@ we can get images by different sizes, such as:
 * "w780"
 * "original"
 
+
+--- 
+
+* fix axios version to 0.18.1
+red: https://github.com/axios/axios/issues/2190

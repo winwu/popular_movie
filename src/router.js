@@ -9,13 +9,14 @@ Vue.use(Router)
 // - only available in html5 history mode
 // - defaults to no scroll behavior
 // - return false to prevent scroll
-const scrollBehavior = function (to, from, savedPosition) {
-	return new Promise((resolve, reject) => {
-		setTimeout(() => {
-			resolve({ x: 0, y: 0 })
-		}, 300)
-	})
-}
+// const scrollBehavior = function (to, from, savedPosition) {
+// 	return new Promise((resolve, reject) => {
+// 		setTimeout(() => {
+// 			resolve({ x: 0, y: 0 })
+// 		}, 300)
+// 	})
+// }
+
 export default new Router({
 	mode: 'history',
 	base: process.env.BASE_URL,

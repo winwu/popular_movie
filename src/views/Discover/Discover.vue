@@ -143,7 +143,7 @@ export default {
         CustomDropdown
     },
     methods: {
-        async initData(currentP, year, sort) {
+        async initData(currentP/*, year, sort*/) {
             // this.yearSelected = year;
             // this.sortSelected = sort;
 
