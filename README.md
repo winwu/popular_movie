@@ -6,7 +6,9 @@ contain functions:
 * Search function: header can search movie information.
 * Discover page: Refer to the page made by the official Discover page.
 
-- demo screenshot:
+---
+
+Demo screenshot: (*I removed the real picture from API response, just for presenting the prototype.)
 
 <img src="../master/public/localhost_8080_demo.png?raw=true">
 
