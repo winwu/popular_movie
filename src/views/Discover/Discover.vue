@@ -81,38 +81,27 @@
 <script>
 import { ContentLoader } from 'vue-content-loader'
 import CustomDropdown from './CustomDropdown'
+
 export default {
     name: 'discover',
     data() {
+        const currenyYear = new Date().getFullYear();
+        const listObject = [];
+        for (let i = currenyYear; i >= 2016; i--) {
+            listObject.push({
+                key: i,
+                value: i
+            })
+        }
+        
         return {
             isLoading: false,
             results: [],
             currentPage: null,
             totalResults: null,
             totalPages: null,
-            listYear: [
-                {
-                    key: 2015,
-                    value: 2015
-                },
-                {
-                    key: 2016,
-                    value: 2016
-                },
-                {
-                    key: 2017,
-                    value: 2017
-                },
-                {
-                    key: 2018,
-                    value: 2018
-                },
-                {
-                    key: 2019,
-                    value: 2019
-                }
-            ],
-            yearSelected: parseInt(this.$route.query.year ? this.$route.query.year : (new Date()).getFullYear()),
+            listYear: listObject,
+            yearSelected: parseInt(this.$route.query.year ? this.$route.query.year : currenyYear),
             listSort: [
                 {
                     key: 'popularity.desc',
