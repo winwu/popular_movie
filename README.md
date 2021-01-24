@@ -6,6 +6,10 @@ contain functions:
 * Search function: header can search movie information.
 * Discover page: Refer to the page made by the official Discover page.
 
+- demo screenshot:
+
+<img src="../main/public/localhost_8080_demo.png?raw=true">
+
 ### Something need to improve:
 * The header searchbar can be supplemented by selecting up and down throught the keyboard, and the scroll bar in the search bar must be moved along with it.
 
