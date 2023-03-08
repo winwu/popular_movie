@@ -1,10 +1,11 @@
 # Popular Movie
 
-contain functions:
-* Home page: Lists the main popular movies, category listings, and popular and Upcoming movie entry links.
-* Detail Page: Lists the main information of the movie. The tabs below list the reviews, cast information, and trailer videos.
-* Search function: header can search movie information.
-* Discover page: Refer to the page made by the official Discover page.
+Main features:
+
+* **Home page**: Lists the main popular movies, category listings, and popular and Upcoming movie entry links.
+* **Detail Page**: Lists the main information of the movie. The tabs below list the reviews, cast information, and trailer videos.
+* **Search**: header can search movie information.
+* **Discover page**: Refer to the page made by the official Discover page.
 
 ---
 
