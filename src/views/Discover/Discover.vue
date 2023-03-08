@@ -187,11 +187,11 @@ export default {
     },
     watch: {
         yearSelected() {
-            console.log('year change');
+            // console.log('year change');
             this.renewFetch(1);
         },
         sortSelected() {
-            console.log('sort change');
+            // console.log('sort change');
             this.renewFetch(1);
         }
     },

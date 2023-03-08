@@ -41,7 +41,7 @@ export default {
                     }
                 })
                 .then(res => {
-                    console.log('res', res);
+                    // console.log('res', res);
                     if (res.data && res.data.results) {
                         this.datas = res.data.results;
                         this.totalPages = res.data.total_pages;

@@ -6,7 +6,7 @@ const LATENCY = 3000;
 
 export default {
     mockLogin(data, cb) {
-        console.log('data for login ajax', data);
+        // console.log('data for login ajax', data);
         const user = {
             name: 'win',
             last_login_time: '2019-01-17',

@@ -186,7 +186,7 @@ export default {
     },
     watch: {
         currentTab: function () {
-            console.log('tab changes!', this.currentTab);
+            // console.log('tab changes!', this.currentTab);
             this.$router.replace({
                 name: this.$router.name,
                 params: {

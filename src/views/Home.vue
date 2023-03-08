@@ -119,7 +119,7 @@ export default {
                     }
                 })
                 .then(res => {
-                    console.log('res', res);
+                    // console.log('res', res);
                     if (res.data && res.data.results) {
                         this.page = res.data.page;
                         this.populars = res.data.results;
@@ -150,7 +150,7 @@ export default {
             })
         },
         changePage(p) {
-            console.warn('user want to p', p);
+            // console.warn('user want to p', p);
             this.$set(this, 'page', p);
             this.fetchPopular();
         }
